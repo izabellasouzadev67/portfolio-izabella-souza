@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Izabella</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <p class="titlenav"><strong>Izabella Souza Matos</strong></p>
+        <nav class="itensnav">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="projeto.html">Projeto</a>
+            <a href="contato.html">Contato</a>
+            <a href="formacao.html">Formação</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="secao-contato">
+    <div class="contato-container">
+        <h1>Contato</h1>
+        <p class="subtitulo">Fale comigo preenchendo o formulário abaixo:</p>
+        
+        <form class="formulario-moderno">
+            <div class="campo-grupo">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+            </div>
+
+            <div class="campo-grupo">
+                <label for="assunto">Assunto</label>
+                <select id="assunto" name="assunto" required>
+                    <option value="">Selecione um assunto</option>
+                    <option value="duvida">Dúvida</option>
+                    <option value="sugestao">Sugestão</option>
+                    <option value="reclamacao">Reclamação</option>
+                    <option value="projeto">Projetos</option>
+                </select>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+        </form>
+    </div>
+</section>
+        </section>
+    </main>
+
+    <footer>
+       <div class="footer-container">
+    <p>Minhas redes sociais</p>
+    <ul class="footer-links">
+        <li>
+            <a href="https://www.linkedin.com/in/izabella-souza-matos/" target="_blank" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.figma.com/files/team/1687251064527399275/folder/663341080?fuid=1687251063166864576" target="_blank" aria-label="Figma">
+                <i class="fa-brands fa-figma"></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://scratch.mit.edu/projects/123456789/" target="_blank" aria-label="Scratch">
+                <i class="fa-solid fa-code"></i> <!-- Ícone de código para representar o Scratch/projetos -->
+            </a>
+        </li>
+    </ul>
+</div>
+        <p>2026 Izabella Souza Matos. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
