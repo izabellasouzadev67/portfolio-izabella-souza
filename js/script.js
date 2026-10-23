@@ -1,4 +1,3 @@
-
 console.log("Olá, Izabella!");
 const nome= "Izabella Souza Matos";
 let hora = new Date() .getHours();
