@@ -827,31 +827,25 @@ body {
     color: #333333;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-/* Cores quando a classe "escuro" estiver ativa */
-body.escuro {
-    background-color: #121212;
-    color: #f0f0f0;
+/* Estado Padrão = Modo Claro */
+body {
+    background-color: #ffffff; /* Fundo claro */
+    color: #222222;            /* Texto escuro */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Se você tiver cards, caixas ou fundos específicos, lembre-se de estilizá-los também: */
+/* Estado Ativo = Modo Escuro */
+body.escuro {
+    background-color: #121212; /* Fundo escuro */
+    color: #f0f0f0;            /* Texto claro */
+}
+
+/* Ajuste nos cards e caixas do site */
 body.escuro .hero-card,
-body.escuro .gostos-container {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-}
-/* Quando a classe 'escuro' estiver ativa no body, mude as cores: */
-body.escuro {
-    background-color: #121212 !important;
-    color: #f0f0f0 !important;
-}
-
-/* Se você tiver caixas ou cards brancos, eles também precisam escurecer: */
 body.escuro .card-perfil,
-body.escuro .hero-card,
 body.escuro .gostos-container,
 body.escuro .lista-habilidades-moderna li,
 body.escuro .lista-certificados li {
-    background-color: #1e1e1e !important;
-    color: #f0f0f0 !important;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
 }
