@@ -176,6 +176,16 @@ footer {
     margin-top: 20px;
     border-top: 1px solid #FFAFCC;
 }
+.escuro {
+    background-color:#000000;
+    color:#461035;
+}
+.escuro .card {
+    background-color:#4d1744;
+}
+.escuro h2 {
+    color:#300330;
+}
 
 /* Responsividade para telas menores (Celulares) */
 @media (max-width: 600px) {
@@ -664,7 +674,6 @@ footer {
     flex-direction: column;
     gap: 20px;
 }
-
 /* Estilo de cada card de projeto */
 .card-projeto {
     background-color: #495057;
@@ -791,4 +800,14 @@ footer {
     margin: 0;
     color: #CED4DA;
     font-size: 14px;
+}
+#efeito-digitar {
+    border-right: 2px solid var(--cor-texto, #000); /* Usa a cor do seu texto */
+    animation: piscar 0.75s step-end infinite;
+    padding-right: 5px;
+}
+
+@keyframes piscar {
+    from, to { border-color: transparent }
+    50% { border-color: #3498db; /* Cor do cursor (pode mudar para a cor do seu site) */ }
 }
