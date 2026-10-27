@@ -69,7 +69,20 @@ function digitar() {
 
 // Garante o início do script assim que a página carregar estruturalmente
 window.addEventListener("DOMContentLoaded", digitar);
+    // ... parte de cima do código ...
+    let velocidade = apagando ? 50 : 150;
 
+    if (!apagando && indexLetra === palavraAtual.length) {
+        velocidade = 2000; 
+        apagando = true;
+    } else if (apagando && indexLetra === 0) {
+        apagando = false;
+        indexPalavra = (indexPalavra + 1) % palavras.length;
+        velocidade = 500; 
+    }
+
+    setTimeout(digitar, velocidade); // Certifique-se de que está escrito "velocidade" aqui!
+}
 // ==========================================
 // 3. ALTERNADOR DE TEMA (CLARO/ESCURO)
 // ==========================================
