@@ -829,15 +829,15 @@ body {
 }
 /* Estado Padrão = Modo Claro */
 body {
-    background-color: #ffffff; /* Fundo claro */
+    background-color: #cc3030; /* Fundo claro */
     color: #222222;            /* Texto escuro */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Estado Ativo = Modo Escuro */
 body.escuro {
-    background-color: #121212; /* Fundo escuro */
-    color: #f0f0f0;            /* Texto claro */
+    background-color: #222222; /* Fundo escuro */
+    color: #cc3030;            /* Texto claro */
 }
 
 /* Ajuste nos cards e caixas do site */
