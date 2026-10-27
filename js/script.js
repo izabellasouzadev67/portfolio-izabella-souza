@@ -23,43 +23,40 @@ botao.addEventListener("click",function () {
         botao.textContent="Modo escuro";
     }
 });
-// Configuração do efeito de digitação
-const elemento = document.querySelector("#efeito-digitar");
-const palavras = ["Desenvolvedora", "Estudante de TI", "Criativa", "Izabella"];
+// 2. EFEITO DE DIGITAÇÃO (TYPING EFFECT)
+// ==========================================
+const elementoDigitar = document.querySelector("#efeito-digitar");
+const palavras = ["Desenvolvedora Web", "UI/UX Designer", "Estudante de TI", "Criativa"];
 let indexPalavra = 0;
 let indexLetra = 0;
 let apagando = false;
 
 function digitar() {
+    if (!elementoDigitar) return; // Proteção caso o elemento não exista na página
+    
     const palavraAtual = palavras[indexPalavra];
     
     if (apagando) {
-        // Remove uma letra
-        elemento.textContent = palavraAtual.substring(0, indexLetra - 1);
+        elementoDigitar.textContent = palavraAtual.substring(0, indexLetra - 1);
         indexLetra--;
     } else {
-        // Adiciona uma letra
-        elemento.textContent = palavraAtual.substring(0, indexLetra + 1);
+        elementoDigitar.textContent = palavraAtual.substring(0, indexLetra + 1);
         indexLetra++;
     }
 
-    // Define a velocidade (mais rápido ao apagar)
     let velocidade = apagando ? 50 : 150;
 
-    // Se terminou de digitar a palavra inteira
     if (!apagando && indexLetra === palavraAtual.length) {
-        velocidade = 2000; // Pausa de 2 segundos antes de começar a apagar
+        velocidade = 2000; // Pausa de 2 segundos quando termina de digitar
         apagando = true;
-    } 
-    // Se terminou de apagar a palavra inteira
-    else if (apagando && indexLetra === 0) {
+    } else if (apagando && indexLetra === 0) {
         apagando = false;
-        indexPalavra = (indexPalavra + 1) % palavras.length; // Passa para a próxima palavra
-        velocidade = 500; // Pausa rápida antes de começar a digitar a nova palavra
+        indexPalavra = (indexPalavra + 1) % palavras.length;
+        velocidade = 500; // Pausa antes de começar a próxima
     }
 
-    setTimeout(digitar, velocidade);
+    setTimeout(digitar, velocidad);
 }
 
-// Inicia o efeito assim que a página carregar
+// Inicia o efeito assim que a página estiver pronta
 window.addEventListener("DOMContentLoaded", digitar);
