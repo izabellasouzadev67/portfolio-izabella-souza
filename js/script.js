@@ -58,6 +58,10 @@ function digitar() {
     }
 
     setTimeout(digitar, velocidade); 
+    // Procure por esse bloco dentro do seu script.js e substitua por este:
+if (window.location.pathname.includes("sobre.html")) {
+    palavras = ["uma Desenvolvedora Web.", "uma UI/UX Designer.", "uma Especialista de TI.", "uma Dev Dedicada."];
+}
 }
 
 window.addEventListener("DOMContentLoaded", digitar);
