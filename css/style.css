@@ -829,15 +829,15 @@ body {
 }
 /* Estado Padrão = Modo Claro */
 body {
-    background-color: #0a0a0a; /* Fundo claro */
-    color: #02eeee;           /* Texto escuro */
+    background-color: #5a0d3a; /* Fundo claro */
+    color: #000000;           /* Texto escuro */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Estado Ativo = Modo Escuro */
 body.escuro {
-    background-color: #c75c88; /* Fundo escuro */
-    color: #02eeee;            /* Texto claro */
+    background-color: #3d3b3c; /* Fundo escuro */
+    color: #ffffff;            /* Texto claro */
 }
 
 /* Ajuste nos cards e caixas do site */
@@ -846,6 +846,6 @@ body.escuro .card-perfil,
 body.escuro .gostos-container,
 body.escuro .lista-habilidades-moderna li,
 body.escuro .lista-certificados li {
-    background-color: #222222;
-    color: #cc3030; 
+    background-color: #000000;
+    color: #ffffff; 
 }
