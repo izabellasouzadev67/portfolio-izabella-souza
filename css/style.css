@@ -811,3 +811,13 @@ footer {
     from, to { border-color: transparent }
     50% { border-color: #3498db; /* Cor do cursor (pode mudar para a cor do seu site) */ }
 }
+#efeito-digitar {
+    border-right: 2px solid currentColor;
+    animation: piscarCursor 0.75s step-end infinite;
+    padding-right: 4px;
+}
+
+@keyframes piscarCursor {
+    from, to { border-color: transparent }
+    50% { border-color: currentColor; }
+}

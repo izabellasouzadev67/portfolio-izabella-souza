@@ -1,39 +1,34 @@
-console.log("Olá, Izabella!");
-const nome= "Izabella Souza Matos";
-let hora = new Date() .getHours();
-console.log(hora);
+// ==========================================
+// 1. CONFIGURAÇÃO DA SAUDAÇÃO POR HORÁRIO
+// ==========================================
+const nome = "Izabella Souza Matos";
+const hora = new Date().getHours();
 let saudacao;
+
 if (hora < 12) {
     saudacao = "Bom dia!";
-} else if (hora >= 12 && hora < 18) {
+} else if (hora < 18) {
     saudacao = "Boa tarde!";
 } else {
     saudacao = "Boa noite!";
 }
-console.log(saudacao);
-const título= document.querySelector("h1");
-título.textContent= saudacao + ",eu sou a " + nome; 
-console.log("Olá, Izabella!");
-const botao= document.querySelector("#tema");
-botao.addEventListener("click",function () {
-    document.body.classList.toggle("escuro");
-    if (document.body.classList.contains("escuro")) {
-        botao.textContent="Modo claro";
-    } else {
-        botao.textContent="Modo escuro";
-    }
-});
+
+const tituloSaudacao = document.querySelector("#titulo-saudacao");
+if (tituloSaudacao) {
+    tituloSaudacao.textContent = `${saudacao} Bem-vindo ao meu perfil`;
+}
+
 // ==========================================
 // 2. EFEITO DE DIGITAÇÃO REUTILIZÁVEL
 // ==========================================
 const elementoDigitar = document.querySelector("#efeito-digitar");
 
-// Define palavras diferentes dependendo da página que o usuário está!
-let palavras = ["Desenvolvedora Web", "UI/UX Designer", "Estudante de TI", "Criativa"];
+// Palavras padrão para a página inicial (index.html)
+let palavras = ["Desenvolvedora Web", "UI/UX Designer", "Estudante de TI", "uma profissional Criativa"];
 
-// Se o usuário estiver na página "sobre.html", mudamos as palavras para encaixar na sua frase
+// Se o usuário estiver na página sobre, ajusta as palavras para fazerem sentido com a frase
 if (window.location.pathname.includes("sobre.html")) {
-    palavras = ["uma Desenvolvedora Web.", "uma UI/UX Designer.", "uma Profissional de TI.", "uma Dev Criativa."];
+    palavras = ["uma Desenvolvedora Web", "uma UI/UX Designer", "uma Especialista de TI", "uma Dev Dedicada"];
 }
 
 let indexPalavra = 0;
@@ -41,7 +36,7 @@ let indexLetra = 0;
 let apagando = false;
 
 function digitar() {
-    if (!elementoDigitar) return; // Se a página atual não tiver o ID, cancela sem dar erro no console
+    if (!elementoDigitar) return; 
     
     const palavraAtual = palavras[indexPalavra];
     
@@ -61,28 +56,16 @@ function digitar() {
     } else if (apagando && indexLetra === 0) {
         apagando = false;
         indexPalavra = (indexPalavra + 1) % palavras.length;
-        velocidade = 500; // Pausa curta antes de iniciar a nova palavra
+        velocidade = 500; // Pausa antes de começar a próxima palavra
     }
 
-    setTimeout(digitar, velocidad); // Corrigido o nome da variável de tempo externa
+    // CORRIGIDO: alterado de 'velocidad' para 'velocidade' para evitar erros de execução
+    setTimeout(digitar, velocidade); 
 }
 
-// Garante o início do script assim que a página carregar estruturalmente
+// Inicializa o efeito de digitação
 window.addEventListener("DOMContentLoaded", digitar);
-    // ... parte de cima do código ...
-    let velocidade = apagando ? 50 : 150;
 
-    if (!apagando && indexLetra === palavraAtual.length) {
-        velocidade = 2000; 
-        apagando = true;
-    } else if (apagando && indexLetra === 0) {
-        apagando = false;
-        indexPalavra = (indexPalavra + 1) % palavras.length;
-        velocidade = 500; 
-    }
-
-    setTimeout(digitar, velocidade); // Certifique-se de que está escrito "velocidade" aqui!
-}
 // ==========================================
 // 3. ALTERNADOR DE TEMA (CLARO/ESCURO)
 // ==========================================
