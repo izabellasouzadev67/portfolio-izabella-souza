@@ -849,3 +849,6 @@ body.escuro .lista-certificados li {
     background-color: #000000;
     color: #ffffff; 
 }
+.erro{
+    background-color:#f00c0c;
+}
