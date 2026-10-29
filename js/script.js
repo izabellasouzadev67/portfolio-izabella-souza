@@ -44,3 +44,13 @@ if (botao) {
         }
     });
 }
+
+const gostos =["Comunicação assertiva","Trabalho colaborativo","Aprendizagem contínua","Resiliência"];
+console.log(gostos.length);
+console.log(gostos[0]);
+const lista=document.querySelector("#gostos")
+for (const gosto of gostos) {
+    const item = document.createElement("li");
+    item.textContent=gosto;
+    lista.appendChild(item);
+}
