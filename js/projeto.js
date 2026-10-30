@@ -18,3 +18,7 @@ function criarCard(projeto) {
     card.appenChild(texto);
     listaProjetos.appenChild(card);
 }
+
+for (const projeto of projetos) {
+    criarCard(projeto);
+}
