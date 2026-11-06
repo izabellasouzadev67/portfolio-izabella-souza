@@ -1,3 +1,6 @@
+/* ==========================================================
+   VALIDAÇÃO DO FORMULÁRIO DE CONTATO
+   ========================================================== */
 const formulario = document.querySelector("#formulario");
 const resposta = document.querySelector("#resposta");
 
