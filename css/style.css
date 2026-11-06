@@ -1,322 +1,819 @@
+/* ==========================================================
+   1. VARIÁVEIS (paleta) — tema escuro é o padrão
+   ========================================================== */
+:root {
+    --bg: #343A40;
+    --bg-card: #495057;
+    --bg-elevado: #212529;
+    --texto: #FEEAC7;
+    --texto-suave: #CED4DA;
+    --destaque: #FFAFCC;
+    --acao: #9A031E;
+    --acao-hover: #720216;
+    --sobre-acao: #FFFFFF;
+    --borda: #6C757D;
+    --sombra: rgba(0, 0, 0, 0.25);
+    --raio: 16px;
+    --largura: 700px;
+}
+
+/* Tema claro: o JS só precisa alternar a classe "claro" no body */
+body.claro {
+    --bg: #FFF8EE;
+    --bg-card: #FFFFFF;
+    --bg-elevado: #F1E3CF;
+    --texto: #2B2B2B;
+    --texto-suave: #5C5C5C;
+    --destaque: #9A031E;
+    --acao: #9A031E;
+    --acao-hover: #720216;
+    --borda: #D9C5B2;
+    --sombra: rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================================
+   2. ANIMAÇÕES (@keyframes)
+   ========================================================== */
+
+/* Página inteira aparece suavemente */
+@keyframes aparecer {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Título desliza da esquerda */
+@keyframes deslizarTitulo {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Cards e itens sobem enquanto aparecem */
+@keyframes surgir {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header desce do topo */
+@keyframes descer {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Foto flutuando devagar */
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+/* Brilho pulsando (badge de boas-vindas) */
+@keyframes pulsar {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 175, 204, 0.5); }
+    50%      { box-shadow: 0 0 0 8px rgba(255, 175, 204, 0); }
+}
+
+/* Ícone dá um pulinho */
+@keyframes pular {
+    0%, 100% { transform: translateY(0); }
+    40%      { transform: translateY(-6px); }
+    60%      { transform: translateY(-2px); }
+}
+
+/* Cursor piscando do efeito de digitação */
+@keyframes piscarCursor {
+    from, to { border-color: transparent; }
+    50%      { border-color: currentColor; }
+}
+
+/* ==========================================================
+   3. RESET E BASE
+   ========================================================== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: #343A40;
-    color: #FEEAC7;
-    font-family:'Poppins', sans-serif;
     margin: 0;
+    background-color: var(--bg);
+    color: var(--texto);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    animation: aparecer 0.6s ease;
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
 }
 
 h1 {
-    color: #5F0F40;
-    font-size: 24px;
-    font-weight: 100; /* Removido o 'px' pois font-weight não usa unidade */
-    font-family: Helvetica;
-    background-color: #D9C5B2;
-    border-radius: 40px;
-    display: inline-block; 
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--texto);
+    text-align: center;
+    margin: 0 0 8px;
+    animation: deslizarTitulo 0.6s ease-out;
+}
+
+h2 {
+    font-size: 22px;
+    color: var(--texto);
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+a {
+    color: var(--destaque);
+    transition: color 0.3s ease;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Acessibilidade: foco visível */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--destaque);
+    outline-offset: 3px;
+}
+
+/* ==========================================================
+   4. LAYOUT: header, nav, main, footer
+   ========================================================== */
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background-color: var(--bg-elevado);
+    border-bottom: 2px solid var(--destaque);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 14px var(--sombra);
+    transition: background-color 0.4s ease;
+    animation: descer 0.6s ease-out;
+}
+
+.titlenav {
+    margin: 0;
+    font-size: 18px;
+    color: var(--texto);
 }
 
 nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    background-color: #e99292;
-    padding: 10px 0;
-}
-
-nav a {
-    color: #9A031E;
-    text-decoration: none;
-    margin-right: 15px;
-    display: inline-block;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-nav a:hover {
-    color: #ff8a4c;
-}
-
-.card:hover {
-    transform:TranslateY(-6px);
-    box-shadow: 0 10px 24px rgb(52, 241, 200);
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: coral;
-    padding: 10px 20px;
+    gap: 8px 18px;
+}
+
+/* Linha do menu cresce do centro para as bordas */
+nav a {
+    position: relative;
+    color: var(--texto);
+    text-decoration: none;
+    padding: 4px 2px;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: var(--destaque);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+    color: var(--destaque);
+}
+
+nav a:hover::after,
+nav a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+#tema {
+    background: transparent;
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+#tema:hover {
+    border-color: var(--destaque);
+    color: var(--destaque);
+    transform: scale(1.05);
+}
+
+#tema:active {
+    transform: scale(0.95);
 }
 
 main {
-    max-width: 600px;
+    max-width: var(--largura);
     margin: 0 auto;
     padding: 20px;
-}
-
-article {
-    background-color: #495057; 
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-article:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.card {
-    background-color: #5F0F40;
-    padding: 24px;
-    margin-bottom: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
-}
-
-table {
-    border-collapse: collapse;
-    margin: 0 auto;
-}
-
-th {
-    border: 1px solid #FEEAC7;
-    padding: 8px 16px;
-    background-color: rgb(27, 3, 49);
-}
-
-/* Estilização da seção de certificados */
-.secao-certificados {
-    padding: 40px 20px;
-    background-color: #e94934;
-    margin-top: 20px;
-    border-radius: 24px;
-}
-
-.secao-certificados h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #b224be;
-}
-
-.lista-certificados {
-    list-style: none;
-    padding: 0;
-    border-radius: 12px;
-}
-
-.lista-certificados li {
-    padding: 12px;
-    border-bottom: 1px solid rgb(0, 204, 231);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.curso-nome {
-    font-weight: bold;
-}
-
-/* Estilo do botão do PDF */
-.btn-pdf {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-}
-
-.btn-pdf:hover {
-    background-color: #6F1D1B;
-}
-
-.gostos {
-    display: flex;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
-}
-
-.gostos li {
-    background-color: #9A031E;
-    padding: 8px 16px;
-    border-radius: 20px;
-}
-
-.foto-sobre {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    border-radius: 12px;
-    border: 3px solid #ccc;
-    display: block;
-    margin: 20px auto; /* Centraliza a imagem na tela */
-}
-
-@keyframes deslizarTitulo {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0); 
-    }
 }
 
 footer {
-    background-color: #212529;
-    color: #FEEAC7;
+    background-color: var(--bg-elevado);
+    color: var(--texto);
     text-align: center;
     padding: 20px 0;
-    margin-top: 20px;
-    border-top: 1px solid #FFAFCC;
-}
-.escuro {
-    background-color:#000000;
-    color:#461035;
-}
-.escuro .card {
-    background-color:#4d1744;
-}
-.escuro h2 {
-    color:#300330;
+    margin-top: 40px;
+    border-top: 1px solid var(--destaque);
+    transition: background-color 0.4s ease;
 }
 
-/* Responsividade para telas menores (Celulares) */
-@media (max-width: 600px) {
-    header {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    h1 {
-        font-size: 28px;
-    }
-}
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Espaço entre os ícones */
+    gap: 20px;
     list-style: none;
     padding: 0;
     margin: 10px 0;
 }
 
 .footer-links a {
-    color: #FEEAC7; /* Cor dos ícones */
-    font-size: 24px;  /* Tamanho dos ícones */
+    color: var(--texto);
+    font-size: 24px;
+    display: inline-block;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-links a:hover {
-    color: #FFAFCC; /* Cor ao passar o mouse */
-    transform: scale(1.2); /* Dá um leve zoom quando passa o mouse */
-}
-/* Container centralizado para dar respiro */
-.secao-contato {
-    max-width: 550px;
-    margin: 40px auto;
-    padding: 0 20px;
+    color: var(--destaque);
+    transform: scale(1.25) rotate(-6deg);
 }
 
-.contato-container {
-    background-color: #495057; /* Fundo do card */
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+/* ==========================================================
+   5. COMPONENTES REUTILIZÁVEIS
+   ========================================================== */
+
+/* Base comum de todos os cards */
+.card,
+.hero-card,
+.card-perfil,
+.card-projeto,
+.card-formacao,
+.contato-container,
+.gostos-container,
+.secao-certificados,
+.lista-habilidades-moderna li,
+.lista-hard-skills li,
+article {
+    background-color: var(--bg-card);
+    border-radius: var(--raio);
+    box-shadow: 0 6px 20px var(--sombra);
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+                background-color 0.4s ease;
+    /* "backwards" evita que a animação trave o efeito de hover */
+    animation: surgir 0.6s ease-out backwards;
 }
 
-.secao-contato h1 {
-    text-align: center;
-    margin-bottom: 5px;
+.card,
+.hero-card,
+.card-perfil,
+.card-projeto,
+.card-formacao,
+article {
+    padding: 24px;
 }
 
-.subtitulo {
-    text-align: center;
-    color: #CED4DA;
-    margin-bottom: 30px;
+.card:hover,
+.card-projeto:hover,
+.card-formacao:hover,
+article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px var(--sombra);
+}
+
+/* Entrada em sequência (um item depois do outro) */
+.projetos-grid > :nth-child(1),
+.formacao-grid > :nth-child(1),
+.lista-habilidades-moderna li:nth-child(1),
+.lista-hard-skills li:nth-child(1),
+.lista-certificados li:nth-child(1),
+.gostos li:nth-child(1) { animation-delay: 0.1s; }
+
+.projetos-grid > :nth-child(2),
+.formacao-grid > :nth-child(2),
+.lista-habilidades-moderna li:nth-child(2),
+.lista-hard-skills li:nth-child(2),
+.lista-certificados li:nth-child(2),
+.gostos li:nth-child(2) { animation-delay: 0.2s; }
+
+.projetos-grid > :nth-child(3),
+.formacao-grid > :nth-child(3),
+.lista-habilidades-moderna li:nth-child(3),
+.lista-hard-skills li:nth-child(3),
+.lista-certificados li:nth-child(3),
+.gostos li:nth-child(3) { animation-delay: 0.3s; }
+
+.projetos-grid > :nth-child(4),
+.formacao-grid > :nth-child(4),
+.lista-habilidades-moderna li:nth-child(4),
+.lista-hard-skills li:nth-child(4),
+.gostos li:nth-child(4) { animation-delay: 0.4s; }
+
+.projetos-grid > :nth-child(n+5),
+.formacao-grid > :nth-child(n+5),
+.gostos li:nth-child(n+5) { animation-delay: 0.5s; }
+
+/* Badges (etiquetas) */
+.badge-ola,
+.status-badge,
+.badge-tech {
+    display: inline-block;
+    background-color: var(--bg);
+    color: var(--destaque);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--destaque);
+}
+
+.badge-ola {
+    font-size: 13px;
+    padding: 6px 14px;
+    margin-bottom: 15px;
+    animation: pulsar 2.4s ease-in-out infinite;
+}
+
+.status-badge {
+    margin-bottom: 8px;
+}
+
+/* Caixas de ícone */
+.icone-formacao,
+.projeto-icone {
+    background-color: var(--acao);
+    color: var(--sobre-acao);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.icone-formacao {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+}
+
+.projeto-icone {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+}
+
+.card-formacao:hover .icone-formacao,
+.card-projeto:hover .projeto-icone {
+    transform: rotate(-8deg) scale(1.1);
+}
+
+/* Botões */
+.btn-principal,
+.btn-secundario,
+.btn-projeto,
+.btn-pdf,
+.btn-enviar {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+                color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-principal,
+.btn-enviar,
+.btn-pdf {
+    background-color: var(--acao);
+    color: var(--sobre-acao);
+    border: none;
+}
+
+.btn-principal:hover,
+.btn-enviar:hover,
+.btn-pdf:hover {
+    background-color: var(--acao-hover);
+    transform: translateY(-3px);
+}
+
+.btn-principal:active,
+.btn-enviar:active,
+.btn-pdf:active,
+.btn-secundario:active,
+.btn-projeto:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* Faixa de brilho que atravessa o botão principal */
+.btn-principal,
+.btn-enviar {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-principal::before,
+.btn-enviar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.btn-principal:hover::before,
+.btn-enviar:hover::before {
+    left: 130%;
+}
+
+.btn-principal {
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(154, 3, 30, 0.4);
+}
+
+.btn-principal:hover {
+    box-shadow: 0 8px 20px rgba(154, 3, 30, 0.55);
+}
+
+.btn-secundario {
+    background-color: var(--bg);
+    color: var(--texto);
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--borda);
+}
+
+.btn-secundario:hover {
+    background-color: var(--bg-card);
+    border-color: var(--destaque);
+    color: var(--destaque);
+    transform: translateY(-3px);
+}
+
+.btn-pdf {
+    padding: 6px 14px;
+    border-radius: 6px;
     font-size: 14px;
 }
 
-/* Agrupamento de cada campo */
-.campo-grupo {
-    margin-bottom: 20px;
+.btn-projeto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg);
+    color: var(--texto);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    border: 1px solid var(--borda);
+}
+
+.btn-projeto:hover {
+    background-color: var(--acao);
+    border-color: var(--acao);
+    color: var(--sobre-acao);
+    transform: translateX(4px);
+}
+
+/* Lista de "gostos" (chips) */
+.gostos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.gostos li {
+    background-color: var(--bg);
+    color: var(--texto);
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--borda);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    animation: surgir 0.5s ease-out backwards;
+}
+
+.gostos li:hover {
+    transform: translateY(-3px) scale(1.04);
+    border-color: var(--destaque);
+}
+
+.gostos i {
+    color: var(--destaque);
+}
+
+/* Tabela */
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th {
+    border: 1px solid var(--texto);
+    padding: 8px 16px;
+    background-color: var(--bg-elevado);
+}
+
+/* Efeito de digitação (cursor piscando) */
+#efeito-digitar {
+    border-right: 2px solid currentColor;
+    padding-right: 4px;
+    animation: piscarCursor 0.75s step-end infinite;
+}
+
+/* ==========================================================
+   6. PÁGINAS
+   ========================================================== */
+
+/* ---------- Início ---------- */
+.secao-inicio {
     display: flex;
     flex-direction: column;
-}
-
-.campo-grupo label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #FEEAC7;
-}
-
-/* Estilização moderna dos inputs, selects e textareas */
-.campo-grupo input,
-.campo-grupo select,
-.campo-grupo textarea {
-    width: 100%;
-    padding: 12px 16px;
-    background-color: #343A40; /* Fundo escuro elegante */
-    border: 2px solid #6C757D;  /* Borda sutil */
-    border-radius: 8px;
-    color: #FEEAC7;
-    font-size: 15px;
-    font-family: inherit;
-    box-sizing: border-box; /* Garante que o padding não estoure o tamanho */
-    transition: all 0.3s ease;
-}
-
-/* Efeito ao clicar no campo (Foco) */
-.campo-grupo input:focus,
-.campo-grupo select:focus,
-.campo-grupo textarea:focus {
-    outline: none;
-    border-color: #FFAFCC; /* Cor de destaque ao focar */
-    box-shadow: 0 0 8px rgba(255, 175, 204, 0.4);
-}
-
-/* Estilo do botão de enviar */
-.btn-enviar {
-    width: 100%;
-    padding: 14px;
-    background-color: #9A031E; /* Cor principal de destaque */
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-}
-
-.btn-enviar:hover {
-    background-color: #720216;
-    transform: translateY(-2px); /* Efeito de leve salto para cima */
-}
-/* Container principal da formação */
-.secao-formacao {
-    max-width: 650px;
+    gap: 30px;
     margin: 40px auto;
-    padding: 0 20px;
 }
 
-.secao-formacao h1 {
+.hero-card {
+    padding: 40px 30px;
     text-align: center;
-    margin-bottom: 5px;
-    display: block; /* Garante que centralize se o h1 tiver estilizações anteriores */
-    background: none;
-    color: #FEEAC7;
 }
 
-/* Grid ou lista dos cards de formação */
+.hero-card h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.descricao-inicio {
+    color: var(--texto-suave);
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.descricao-inicio strong {
+    color: var(--destaque);
+}
+
+.acoes-hero {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.gostos-container {
+    padding: 25px;
+    animation-delay: 0.2s;
+}
+
+.gostos-container h3 {
+    color: var(--texto);
+    font-size: 18px;
+    text-align: center;
+    margin: 0 0 15px;
+}
+
+/* ---------- Sobre ---------- */
+.secao-sobre-mim,
+.secao-habilidades {
+    margin: 40px auto;
+}
+
+.card-perfil {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.foto-sobre {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--destaque);
+    display: block;
+    animation: flutuar 4s ease-in-out infinite;
+}
+
+.texto-perfil h2 {
+    color: var(--destaque);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.texto-perfil p {
+    color: var(--texto-suave);
+    margin: 0;
+}
+
+.lista-habilidades-moderna,
+.lista-hard-skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lista-habilidades-moderna li,
+.lista-hard-skills li {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 12px var(--sombra);
+}
+
+.lista-habilidades-moderna li:hover,
+.lista-hard-skills li:hover {
+    transform: translateY(-4px) translateX(4px);
+}
+
+.lista-habilidades-moderna i,
+.lista-hard-skills i {
+    font-size: 24px;
+    color: var(--destaque);
+    background-color: var(--bg);
+    padding: 12px;
+    border-radius: 10px;
+    min-width: 52px;
+    text-align: center;
+}
+
+/* Ícone dá um pulinho quando o item recebe o mouse */
+.lista-habilidades-moderna li:hover i,
+.lista-hard-skills li:hover i {
+    animation: pular 0.6s ease;
+}
+
+.lista-habilidades-moderna strong,
+.lista-hard-skills strong {
+    color: var(--texto);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.lista-habilidades-moderna p,
+.lista-hard-skills p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+.titulo-hard-skills {
+    margin-top: 40px;
+}
+
+/* Certificados */
+.secao-certificados {
+    margin: 40px auto;
+    padding: 24px;
+}
+
+.secao-certificados h2 {
+    margin-bottom: 10px;
+}
+
+.subtitulo-certificados {
+    color: var(--texto-suave);
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lista-certificados {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-certificados li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--borda);
+    transition: padding-left 0.3s ease;
+    animation: surgir 0.5s ease-out backwards;
+}
+
+.lista-certificados li:hover {
+    padding-left: 10px;
+}
+
+.lista-certificados li:last-child {
+    border-bottom: none;
+}
+
+.curso-nome {
+    font-weight: bold;
+}
+
+.curso-nome i {
+    color: var(--destaque);
+    margin-right: 6px;
+}
+
+.instituicao {
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+/* ---------- Projetos ---------- */
+.secao-projetos {
+    margin: 40px auto;
+}
+
+.subtitulo-projetos {
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.projetos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-projeto {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.projeto-info h2 {
+    font-size: 18px;
+    color: var(--destaque);
+    text-align: left;
+    margin: 0 0 8px;
+}
+
+.projeto-info p {
+    font-size: 14px;
+    color: var(--texto-suave);
+    line-height: 1.5;
+    margin: 0 0 15px;
+}
+
+/* ---------- Formação ---------- */
+.secao-formacao {
+    margin: 40px auto;
+}
+
 .formacao-grid {
     display: flex;
     flex-direction: column;
@@ -324,531 +821,145 @@ footer {
     margin-top: 30px;
 }
 
-/* Estilo individual de cada card de formação */
 .card-formacao {
-    background-color: #495057;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     gap: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-formacao:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* Caixa do ícone */
-.icone-formacao {
-    background-color: #9A031E;
-    color: #FFFFFF;
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    flex-shrink: 0;
-}
-
-/* Textos dentro do card */
 .conteudo-formacao h2 {
     font-size: 18px;
-    color: #FFAFCC;
-    margin: 0 0 4px 0;
+    color: var(--destaque);
+    text-align: left;
+    margin: 0 0 4px;
 }
 
 .conteudo-formacao h3 {
     font-size: 16px;
-    color: #FEEAC7;
-    margin: 0 0 10px 0;
+    color: var(--texto);
     font-weight: normal;
-}
-
-/* Etiqueta de "Cursando" */
-.status-badge {
-    display: inline-block;
-    background-color: #343A40;
-    color: #FFAFCC;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 8px;
-    border: 1px solid #FFAFCC;
+    margin: 0 0 10px;
 }
 
 .previsao {
     font-size: 14px;
-    color: #CED4DA;
+    color: var(--texto-suave);
     margin: 0;
 }
-/* Container principal da página sobre */
-.secao-sobre-mim, 
-.secao-habilidades {
-    max-width: 650px;
+
+/* ---------- Contato ---------- */
+.secao-contato {
+    max-width: 550px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-.secao-sobre-mim h1,
-.secao-habilidades h2 {
+.contato-container {
+    padding: 40px;
+}
+
+.subtitulo {
     text-align: center;
-    margin-bottom: 20px;
-    background: none;
-    color: #FEEAC7;
-    font-size: 24px;
-}
-
-/* Card de perfil combinando foto e texto */
-.card-perfil {
-    background-color: #495057;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-}
-
-/* Ajuste moderno da foto */
-.foto-sobre {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%; /* Deixa a foto redondinha e com estilo profissional */
-    border: 3px solid #FFAFCC;
-}
-
-.texto-perfil h2 {
-    color: #FFAFCC;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.texto-perfil p {
-    color: #CED4DA;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Habilidades em formato de cartões modernos (substituindo a tabela) */
-.lista-habilidades-moderna {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.lista-habilidades-moderna li {
-    background-color: #495057;
-    padding: 18px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.lista-habilidades-moderna li:hover {
-    transform: translateY(-3px);
-}
-
-.lista-habilidades-moderna i {
-    font-size: 24px;
-    color: #FFAFCC;
-    background-color: #343A40;
-    padding: 12px;
-    border-radius: 10px;
-}
-
-.lista-habilidades-moderna strong {
-    color: #FEEAC7;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.lista-habilidades-moderna p {
-    margin: 0;
-    color: #CED4DA;
+    color: var(--texto-suave);
     font-size: 14px;
-}
-
-/* Ajustes na seção de certificados existente */
-.secao-certificados {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #495057;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.subtitulo-certificados {
-    color: #CED4DA;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-.lista-certificados li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 16px 0;
-}
-
-.instituicao {
-    color: #CED4DA;
-    font-size: 13px;
-}
-/* Container principal da página inicial */
-.secao-inicio {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-/* Cartão de Apresentação (Hero Card) */
-.hero-card {
-    background-color: #495057;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-
-/* Etiqueta de boas-vindas */
-.badge-ola {
-    display: inline-block;
-    background-color: #343A40;
-    color: #FFAFCC;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    border: 1px solid #FFAFCC;
-}
-
-.hero-card h1 {
-    font-size: 28px;
-    color: #FEEAC7;
-    background: none;
-    margin-bottom: 15px;
-}
-
-.descricao-inicio {
-    color: #CED4DA;
-    font-size: 16px;
-    line-height: 1.6;
     margin-bottom: 30px;
 }
 
-.descricao-inicio strong {
-    color: #FFAFCC;
-}
-
-/* Botões de Ação Interativos */
-.acoes-hero {
+.campo-grupo {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.btn-principal {
-    background-color: #9A031E;
-    color: #FFFFFF;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 12px rgba(154, 3, 30, 0.4);
-}
-
-.btn-principal:hover {
-    background-color: #720216;
-    transform: translateY(-3px);
-}
-
-.btn-secundario {
-    background-color: #343A40;
-    color: #FEEAC7;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    border: 1px solid #6C757D;
-    transition: all 0.3s ease;
-}
-
-.btn-secundario:hover {
-    background-color: #495057;
-    border-color: #FFAFCC;
-    color: #FFAFCC;
-    transform: translateY(-3px);
-}
-
-/* Seção de Soft Skills / Gostos na Home */
-.gostos-container {
-    background-color: #495057;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.gostos-container h3 {
-    color: #FEEAC7;
-    font-size: 18px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.gostos {
-    display: flex;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.gostos li {
-    background-color: #343A40;
-    color: #FEEAC7;
-    padding: 10px 16px;
-    border-radius: 30px;
+.campo-grupo label {
     font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid #6C757D;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--texto);
+    transition: color 0.3s ease;
 }
 
-.gostos li:hover {
+/* O rótulo ganha destaque quando o campo está em foco */
+.campo-grupo:focus-within label {
+    color: var(--destaque);
+}
+
+.campo-grupo input,
+.campo-grupo select,
+.campo-grupo textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--bg);
+    border: 2px solid var(--borda);
+    border-radius: 8px;
+    color: var(--texto);
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease,
+                transform 0.2s ease;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus,
+.campo-grupo textarea:focus {
+    outline: none;
+    border-color: var(--destaque);
+    box-shadow: 0 0 10px rgba(255, 175, 204, 0.45);
     transform: translateY(-2px);
-    border-color: #FFAFCC;
 }
 
-.gostos i {
-    color: #FFAFCC;
-}
-/* Container principal da seção de projetos */
-.secao-projetos {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 0 20px;
+.btn-enviar {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
-.secao-projetos h1 {
-    text-align: center;
-    margin-bottom: 5px;
-    background: none;
-    color: #FEEAC7;
-    font-size: 24px;
-}
-
-.subtitulo-projetos {
-    text-align: center;
-    color: #CED4DA;
-    font-size: 14px;
-    margin-bottom: 30px;
-}
-
-/* Organização dos cards em lista flexível */
-.projetos-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-/* Estilo de cada card de projeto */
-.card-projeto {
-    background-color: #495057;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-projeto:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* Ícone lateral do projeto */
-.projeto-icone {
-    background-color: #9A031E;
-    color: #FFFFFF;
-    width: 55px;
-    height: 55px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-}
-
-/* Informações do texto do projeto */
-.projeto-info h2 {
-    font-size: 18px;
-    color: #FFAFCC;
-    margin: 0 0 8px 0;
-}
-
-.projeto-info p {
-    font-size: 14px;
-    color: #CED4DA;
-    line-height: 1.5;
-    margin: 0 0 15px 0;
-}
-
-/* Botão interativo para acessar o projeto */
-.btn-projeto {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #343A40;
-    color: #FEEAC7;
-    padding: 8px 16px;
-    border-radius: 6px;
-    text-decoration: none;
+.erro {
+    color: #ff6b6b;
     font-size: 13px;
-    font-weight: bold;
-    border: 1px solid #6C757D;
-    transition: all 0.3s ease;
+    margin-top: 6px;
 }
 
-.btn-projeto:hover {
-    background-color: #9A031E;
-    border-color: #9A031E;
-    color: #FFFFFF;
-    transform: translateX(3px); /* Dá um leve empurrãozinho para a direita */
+/* ==========================================================
+   7. RESPONSIVIDADE E ACESSIBILIDADE (sempre no final)
+   ========================================================== */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .hero-card h1 {
+        font-size: 26px;
+    }
+
+    .card-projeto,
+    .card-formacao {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contato-container {
+        padding: 24px;
+    }
 }
 
-/* Badge indicativo para projetos sem link externo */
-.badge-tech {
-    display: inline-block;
-    background-color: #343A40;
-    color: #FFAFCC;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid #FFAFCC;
-}
-/* Espaçamento e título para as Hard Skills */
-.titulo-hard-skills {
-    margin-top: 40px !important;
-}
+/* Quem pediu menos movimento no sistema não vê nenhuma animação */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 
-/* Estilo da lista de Hard Skills (mesmo padrão moderno das Soft Skills) */
-.lista-hard-skills {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.lista-hard-skills li {
-    background-color: #495057;
-    padding: 18px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.lista-hard-skills li:hover {
-    transform: translateY(-3px);
-}
-
-.lista-hard-skills i {
-    font-size: 24px;
-    color: #FFAFCC;
-    background-color: #343A40;
-    padding: 12px;
-    border-radius: 10px;
-}
-
-.lista-hard-skills strong {
-    color: #FEEAC7;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.lista-hard-skills p {
-    margin: 0;
-    color: #CED4DA;
-    font-size: 14px;
-}
-#efeito-digitar {
-    border-right: 2px solid var(--cor-texto, #000); /* Usa a cor do seu texto */
-    animation: piscar 0.75s step-end infinite;
-    padding-right: 5px;
-}
-
-@keyframes piscar {
-    from, to { border-color: transparent }
-    50% { border-color: #3498db; /* Cor do cursor (pode mudar para a cor do seu site) */ }
-}
-#efeito-digitar {
-    border-right: 2px solid currentColor;
-    animation: piscarCursor 0.75s step-end infinite;
-    padding-right: 4px;
-}
-
-@keyframes piscarCursor {
-    from, to { border-color: transparent }
-    50% { border-color: currentColor; }
-}
-/* Cores normais (Modo Claro) */
-body {
-    background-color: #ffffff;
-    color: #333333;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-/* Estado Padrão = Modo Claro */
-body {
-    background-color: #5a0d3a; /* Fundo claro */
-    color: #000000;           /* Texto escuro */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Estado Ativo = Modo Escuro */
-body.escuro {
-    background-color: #3d3b3c; /* Fundo escuro */
-    color: #ffffff;            /* Texto claro */
-}
-
-/* Ajuste nos cards e caixas do site */
-body.escuro .hero-card,
-body.escuro .card-perfil,
-body.escuro .gostos-container,
-body.escuro .lista-habilidades-moderna li,
-body.escuro .lista-certificados li {
-    background-color: #000000;
-    color: #ffffff; 
-}
-.erro{
-    background-color:#f00c0c;
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }

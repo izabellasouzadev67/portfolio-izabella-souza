@@ -1,56 +1,85 @@
-const nome = "Izabella Souza Matos";
-const hora = new Date().getHours();
-let saudacao;
-
-if (hora < 12) {
-    saudacao = "Bom dia!";
-} else if (hora < 18) {
-    saudacao = "Boa tarde!";
-} else {
-    saudacao = "Boa noite!";
-}
-
+/* ==========================================================
+   1. SAUDAÇÃO (só roda na página que tem #titulo-saudacao)
+   ========================================================== */
 const tituloSaudacao = document.querySelector("#titulo-saudacao");
+
 if (tituloSaudacao) {
-    tituloSaudacao.textContent = `${saudacao} Bem-vindo ao meu perfil`;
+    const hora = new Date().getHours();
+    let saudacao;
+
+    if (hora >= 5 && hora < 12) {
+        saudacao = "Bom dia!";
+    } else if (hora >= 12 && hora < 18) {
+        saudacao = "Boa tarde!";
+    } else {
+        saudacao = "Boa noite!";
+    }
+
+    tituloSaudacao.textContent = `${saudacao} Boas-vindas ao meu perfil`;
 }
+
+/* ==========================================================
+   2. TEMA CLARO / ESCURO
+   O site é escuro por padrão; a classe "claro" no body ativa o tema claro
+   ========================================================== */
 const botao = document.querySelector("#tema");
+const CHAVE_TEMA = "tema";
 
-// 1. Carrega o tema salvo do localStorage ao abrir a página
-if (localStorage.getItem("tema-escuro") === "ativo") {
-    document.body.classList.add("escuro");
-    if (botao) {
-        botao.textContent = "Modo claro";
-    }
-} else {
-    document.body.classList.remove("escuro");
-    if (botao) {
-        botao.textContent = "Modo escuro";
+// localStorage pode falhar (aba anônima, bloqueio de cookies), por isso try/catch
+function lerTemaSalvo() {
+    try {
+        return localStorage.getItem(CHAVE_TEMA);
+    } catch (erro) {
+        return null;
     }
 }
 
-// 2. Alterna o tema ao clicar
+function salvarTema(valor) {
+    try {
+        localStorage.setItem(CHAVE_TEMA, valor);
+    } catch (erro) {
+        // sem problema: o tema só não será lembrado na próxima visita
+    }
+}
+
+function aplicarTema(claro) {
+    document.body.classList.toggle("claro", claro);
+
+    if (botao) {
+        botao.textContent = claro ? "Modo escuro" : "Modo claro";
+    }
+}
+
+// Prioridade: escolha salva > preferência do sistema > padrão (escuro)
+const temaSalvo = lerTemaSalvo();
+const sistemaPrefereClaro = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+aplicarTema(temaSalvo ? temaSalvo === "claro" : sistemaPrefereClaro);
+
 if (botao) {
-    botao.addEventListener("click", function () {
-        document.body.classList.toggle("escuro");
-        
-        // Se AGORA tem a classe "escuro", significa que entrou no Modo Escuro
-        if (document.body.classList.contains("escuro")) {
-            botao.textContent = "Modo claro";
-            localStorage.setItem("tema-escuro", "ativo");
-        } else {
-            botao.textContent = "Modo escuro";
-            localStorage.setItem("tema-escuro", "inativo");
-        }
+    botao.addEventListener("click", () => {
+        const virouClaro = !document.body.classList.contains("claro");
+        aplicarTema(virouClaro);
+        salvarTema(virouClaro ? "claro" : "escuro");
     });
 }
 
-const gostos =["Comunicação assertiva","Trabalho colaborativo","Aprendizagem contínua","Resiliência"];
-console.log(gostos.length);
-console.log(gostos[0]);
-const lista=document.querySelector("#gostos")
-for (const gosto of gostos) {
-    const item = document.createElement("li");
-    item.textContent=gosto;
-    lista.appendChild(item);
+/* ==========================================================
+   3. LISTA DE GOSTOS / SOFT SKILLS (só roda se existir #gostos)
+   ========================================================== */
+const gostos = [
+    "Comunicação assertiva",
+    "Trabalho colaborativo",
+    "Aprendizagem contínua",
+    "Resiliência"
+];
+
+const lista = document.querySelector("#gostos");
+
+if (lista) {
+    for (const gosto of gostos) {
+        const item = document.createElement("li");
+        item.textContent = gosto;
+        lista.appendChild(item);
+    }
 }
