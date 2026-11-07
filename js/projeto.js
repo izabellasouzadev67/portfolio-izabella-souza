@@ -31,4 +31,4 @@ fetch("projetos.json")
     for (const projeto of projetos) {
         criarCard(projeto);
         projetos.push(...data);
-    });
+    };
