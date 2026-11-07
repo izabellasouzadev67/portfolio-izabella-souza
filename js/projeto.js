@@ -25,9 +25,10 @@ function criarCard(projeto) {
     listaProjetos.appendChild(card); // Corrigido de appenChild para appendChild
 }
 
-// Só executa o laço se a lista existir na página atual
-if (listaProjetos) {
+fetch("projetos.json")
+    .then( (resposta) => resposta.json() )
+    .then((projetos) => {} )
     for (const projeto of projetos) {
         criarCard(projeto);
-    }
-}
+        projetos.push(...data);
+    });

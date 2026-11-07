@@ -28,10 +28,10 @@ if (formulario && resposta) {
             return;
         }
 
-        if (mensagem.length < MINIMO) {
-            const faltam = MINIMO - mensagem.length;
+        if (mensagem.length < 100) {
+            const faltam = 100 - mensagem.length;
             mostrarResposta(
-                `Escreva pelo menos ${MINIMO} caracteres (faltam ${faltam}).`,
+                `Faltam ${100} letras.`,
                 "erro"
             );
             campoMensagem.focus();
