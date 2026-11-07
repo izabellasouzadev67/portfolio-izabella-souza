@@ -15,7 +15,7 @@ if (tituloSaudacao) {
         saudacao = "Boa noite!";
     }
 
-    tituloSaudacao.textContent = `${saudacao},eu sou a ${nome} `;
+    tituloSaudacao.textContent = `${saudacao} Boas-vindas ao meu perfil`;
 }
 
 /* ==========================================================
