@@ -8,7 +8,9 @@ const projetos = [
 console.log(projetos[0].título);
 
 const listaProjetos = document.querySelector("#lista-projetos");
-
+const contagem = document.querySelector("#contagem");
+let todos = []; // Variáve
+// l global para armazenar todos os projetos
 function criarCard(projeto) {
     const card = document.createElement("section");
     card.classList.add("card");
@@ -25,10 +27,34 @@ function criarCard(projeto) {
     listaProjetos.appendChild(card); // Corrigido de appenChild para appendChild
 }
 
-fetch("projetos.json")
-    .then( (resposta) => resposta.json() )
-    .then((projetos) => {} )
-    for (const projeto of projetos) {
-        criarCard(projeto);
-        projetos.push(...data);
+const mostrar =(lista) => {
+        listaProjetos.innerHTML="";
+        for (const projeto of lista) {
+            criarCard(projeto);
+        }
+    const títulos= lista.map((projeto) => projeto.título);
+    contagem.textContent=`${lista.length} projetos: ${títulos.join(",")}`;
     };
+
+
+const filtrar =(categoria) => {
+    const lista= todos.filter((projeto) => projeto.categoria === categoria);
+    mostrar(lista);
+};
+
+fetch('projeto.json')
+.then((resposta) => resposta.json())
+.then((projetos) => {
+    todos= projetos;
+    mostrar(todos);
+});
+
+const botaoTodos=document.querySelector("#filtro-todos");
+const botaoPáginaSobreMim=document.querySelector("#filtro-página-sobre-mim");
+const botaoFigma=document.querySelector("#filtro-figma");
+const botaoScratch=document.querySelector("#filtro-scratch");
+
+botaoTodos.addEventListener("click", () => mostrar(todos));
+botaoPáginaSobreMim.addEventListener("click", () => filtrar("página-sobre-mim"));
+botaoFigma.addEventListener("click", () => filtrar("figma"));
+botaoScratch.addEventListener("click", () => filtrar("scratch"));

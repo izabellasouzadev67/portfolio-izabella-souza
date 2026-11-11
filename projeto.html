@@ -25,6 +25,13 @@
     <main>
         <section class="secao-projetos">
             <h1>Meus Projetos</h1>
+            <div class="filtros">
+                <button id="filtro-todos">Todos</button>
+                <button id="filtro-figma">Figma</button>
+                <button id="filtro-página-sobre-mim">Página Sobre Mim</button>
+                <button id="filtro-scratch">Scratch</button>
+            </div>
+            <p id="contagem"></p>
             <div class="projetos" id="lista-projetos"></div>
             <p class="subtitulo-projetos">Conheça alguns dos trabalhos e estudos que desenvolvi</p>
             
@@ -50,10 +57,14 @@
                     </div>
                     <div class="projeto-info">
                         <h2>Página Sobre Mim</h2>
-                        <p>Minha primeira página desenvolvida em HTML e CSS, estruturando a base da programação web.</p>
-                        <span class="badge-tech">HTML5 & CSS</span>
+                        <p>Minha primeira página desenvolvida em HTML,CSS e JavaScript, estruturando a base da programação web.</p>
+                        <span class="badge-tech">HTML5,CSS3,JavaScript</span>
+                        <a href="https://izabellasouzadev67.github.io/portfolio-izabella-souza/sobre.html" target="_blank" class="btn-projeto">
+                            Ver Projeto <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
                 </article>
+                </div>
 
                 <!-- Card 3: Scratch -->
                 <article class="card-projeto">
@@ -66,6 +77,17 @@
                         <a href="https://scratch.mit.edu/projects/123456789/" target="_blank" class="btn-projeto">
                             Ver Projeto <i class="fa-solid fa-arrow-right"></i>
                         </a>
+                    </div>
+                </article>
+
+                <!-- Card 4: Site de Turismo -->
+                <article class="card-projeto">
+                    <div class="projeto-icone">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <div class="projeto-info">
+                        <h2>Site de Turismo</h2>
+                        <p>Projeto de um site para divulgar pontos turísticos de uma cidade. Utilziado HTML para estruturação do código,CSS para estilização e JavaScript para interatividade do usuário final</p>
                     </div>
                 </article>
             </div>
@@ -85,6 +107,6 @@
         <p>2026 Izabella Souza Matos. Todos os direitos reservados.</p>
     </footer>
     <script src="js/script.js"></script>
-    <script src="js/projetos.js"></script>
+    <script src="js/projeto.js"></script>
 </body>
 </html>

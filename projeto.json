@@ -1,0 +1,5 @@
+[
+    { "título": "Projeto", "descricao": "Meu site, com 5 páginas, no ar", "categoria": "projeto" },
+    { "título": "Protótipo Figma", "descricao": "Criação das telas e identidade visual estruturadas para o desenvolvimento deste portfólio.", "categoria": "figma" },
+    { "título": "Minha página sobre mim", "descricao": "Minha primeira página desenvolvida em HTML e CSS, estruturando a base da programação web.", "categoria": "página-sobre-mim" }
+]
