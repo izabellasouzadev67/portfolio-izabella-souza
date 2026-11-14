@@ -1,18 +1,28 @@
+/* ==========================================
+   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
+   ========================================== */
 body {
     background-color: #343A40;
     color: #FEEAC7;
-    font-family:'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
 }
 
-h1 {
-    color: #5F0F40;
-    font-size: 24px;
-    font-weight: 100; /* Removido o 'px' pois font-weight não usa unidade */
-    font-family: Helvetica;
-    background-color: #D9C5B2;
-    border-radius: 40px;
-    display: inline-block; 
+main {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. HEADER E NAVEGAÇÃO
+   ========================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: coral;
+    padding: 10px 20px;
 }
 
 nav {
@@ -34,25 +44,22 @@ nav a:hover {
     color: #ff8a4c;
 }
 
-.card:hover {
-    transform:TranslateY(-6px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0.25);
+/* ==========================================
+   3. TÍTULOS E TIPOGRAFIA
+   ========================================== */
+h1 {
+    color: #5F0F40;
+    font-size: 24px;
+    font-weight: 100;
+    font-family: Helvetica;
+    background-color: #D9C5B2;
+    border-radius: 40px;
+    display: inline-block; 
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: coral;
-    padding: 10px 20px;
-}
-
-main {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
+/* ==========================================
+   4. COMPONENTES: CARDS E BOTÕES
+   ========================================== */
 article {
     background-color: #495057; 
     padding: 20px;
@@ -64,539 +71,6 @@ article {
 article:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.card {
-    background-color: #5F0F40;
-    padding: 24px;
-    margin-bottom: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
-}
-
-table {
-    border-collapse: collapse;
-    margin: 0 auto;
-}
-
-th {
-    border: 1px solid #FEEAC7;
-    padding: 8px 16px;
-    background-color: rgb(27, 3, 49);
-}
-
-/* Estilização da seção de certificados */
-.secao-certificados {
-    padding: 40px 20px;
-    background-color: #e94934;
-    margin-top: 20px;
-    border-radius: 24px;
-}
-
-.secao-certificados h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #b224be;
-}
-
-.lista-certificados {
-    list-style: none;
-    padding: 0;
-    border-radius: 12px;
-}
-
-.lista-certificados li {
-    padding: 12px;
-    border-bottom: 1px solid rgb(0, 204, 231);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.curso-nome {
-    font-weight: bold;
-}
-
-/* Estilo do botão do PDF */
-.btn-pdf {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-}
-
-.btn-pdf:hover {
-    background-color: #6F1D1B;
-}
-
-.gostos {
-    display: flex;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
-}
-
-.gostos li {
-    background-color: #9A031E;
-    padding: 8px 16px;
-    border-radius: 20px;
-}
-
-.foto-sobre {
-    width: 200%;
-    max-width: 250px;
-    height: 200px;
-    object-fit:cover;
-    border-radius: 50%;
-    border: 3px solid #ccc;
-    display: block;
-    margin: 20px auto; /* Centraliza a imagem na tela */
-}
-
-@keyframes deslizarTitulo {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0); 
-    }
-}
-
-footer {
-    background-color: #212529;
-    color: #FEEAC7;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 20px;
-    border-top: 1px solid #FFAFCC;
-}
-
-/* Responsividade para telas menores (Celulares) */
-@media (max-width: 600px) {
-    header {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    h1 {
-        font-size: 28px;
-    }
-}
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Espaço entre os ícones */
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-
-.footer-links a {
-    color: #FEEAC7; /* Cor dos ícones */
-    font-size: 24px;  /* Tamanho dos ícones */
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: #FFAFCC; /* Cor ao passar o mouse */
-    transform: scale(1.2); /* Dá um leve zoom quando passa o mouse */
-}
-/* Container centralizado para dar respiro */
-.gatos-flutuantes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Permite clicar nos elementos abaixo */
-    z-index: 999;
-    overflow: hidden; /* Evita que os gatos saiam da tela */
-}
-
-.gato {
-    position: absolute;
-    bottom: -50px;
-    left: var(--left, 50%);
-    font-size: 2rem;
-    opacity: 0;
-    animation: pulsarESumir 4s ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
-    }
-    @keyframes pulsarESumir {
-        0% {
-            transform: translateY(20px) scale(0.8);
-            opacity: 0;
-        }
-        25% {
-            opacity: 0.9;
-            transform: translateY(-30px) scale(1.1);
-        }
-        50% {
-            transform: translateY(0px) scale(1);
-            opacity: 0.9;
-        }
-        75% {
-            opacity: 0;
-            transform: translateY(-10px) scale(0.9);
-        }
-        100% {
-            opacity: 0;
-        }
-    }
-.secao-contato {
-    max-width: 550px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.contato-container {
-    background-color: #495057; /* Fundo do card */
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.secao-contato h1 {
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.subtitulo {
-    text-align: center;
-    color: #CED4DA;
-    margin-bottom: 30px;
-    font-size: 14px;
-}
-
-/* Agrupamento de cada campo */
-.campo-grupo {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.campo-grupo label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #FEEAC7;
-}
-
-/* Estilização moderna dos inputs, selects e textareas */
-.campo-grupo input,
-.campo-grupo select,
-.campo-grupo textarea {
-    width: 100%;
-    padding: 12px 16px;
-    background-color: #343A40; /* Fundo escuro elegante */
-    border: 2px solid #6C757D;  /* Borda sutil */
-    border-radius: 8px;
-    color: #FEEAC7;
-    font-size: 15px;
-    font-family: inherit;
-    box-sizing: border-box; /* Garante que o padding não estoure o tamanho */
-    transition: all 0.3s ease;
-}
-
-/* Efeito ao clicar no campo (Foco) */
-.campo-grupo input:focus,
-.campo-grupo select:focus,
-.campo-grupo textarea:focus {
-    outline: none;
-    border-color: #FFAFCC; /* Cor de destaque ao focar */
-    box-shadow: 0 0 8px rgba(255, 175, 204, 0.4);
-}
-
-/* Estilo do botão de enviar */
-.btn-enviar {
-    width: 100%;
-    padding: 14px;
-    background-color: #9A031E; /* Cor principal de destaque */
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-}
-
-.btn-enviar:hover {
-    background-color: #720216;
-    transform: translateY(-2px); /* Efeito de leve salto para cima */
-}
-/* Container principal da formação */
-.secao-formacao {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.secao-formacao h1 {
-    text-align: center;
-    margin-bottom: 5px;
-    display: block; /* Garante que centralize se o h1 tiver estilizações anteriores */
-    background: none;
-    color: #FEEAC7;
-}
-
-/* Grid ou lista dos cards de formação */
-.formacao-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-/* Estilo individual de cada card de formação */
-.card-formacao {
-    background-color: #495057;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-formacao:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* Caixa do ícone */
-.icone-formacao {
-    background-color: #9A031E;
-    color: #FFFFFF;
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    flex-shrink: 0;
-}
-
-/* Textos dentro do card */
-.conteudo-formacao h2 {
-    font-size: 18px;
-    color: #FFAFCC;
-    margin: 0 0 4px 0;
-}
-
-.conteudo-formacao h3 {
-    font-size: 16px;
-    color: #FEEAC7;
-    margin: 0 0 10px 0;
-    font-weight: normal;
-}
-
-/* Etiqueta de "Cursando" */
-.status-badge {
-    display: inline-block;
-    background-color: #343A40;
-    color: #FFAFCC;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 8px;
-    border: 1px solid #FFAFCC;
-}
-
-.previsao {
-    font-size: 14px;
-    color: #CED4DA;
-    margin: 0;
-}
-/* Container principal da página sobre */
-.secao-sobre-mim, 
-.secao-habilidades {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.secao-sobre-mim h1,
-.secao-habilidades h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    background: none;
-    color: #FEEAC7;
-    font-size: 24px;
-}
-
-/* Card de perfil combinando foto e texto */
-.card-perfil {
-    background-color: #495057;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-}
-
-/* Ajuste moderno da foto */
-.foto-sobre {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%; /* Deixa a foto redondinha e com estilo profissional */
-    border: 3px solid #FFAFCC;
-}
-
-.texto-perfil h2 {
-    color: #FFAFCC;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.texto-perfil p {
-    color: #CED4DA;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Habilidades em formato de cartões modernos (substituindo a tabela) */
-.lista-habilidades-moderna {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.lista-habilidades-moderna li {
-    background-color: #495057;
-    padding: 18px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.lista-habilidades-moderna li:hover {
-    transform: translateY(-3px);
-}
-
-.lista-habilidades-moderna i {
-    font-size: 24px;
-    color: #FFAFCC;
-    background-color: #343A40;
-    padding: 12px;
-    border-radius: 10px;
-}
-
-.lista-habilidades-moderna strong {
-    color: #FEEAC7;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.lista-habilidades-moderna p {
-    margin: 0;
-    color: #CED4DA;
-    font-size: 14px;
-}
-
-/* Ajustes na seção de certificados existente */
-.secao-certificados {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #495057;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.subtitulo-certificados {
-    color: #CED4DA;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-.lista-certificados li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 16px 0;
-}
-
-.instituicao {
-    color: #CED4DA;
-    font-size: 13px;
-}
-/* Container principal da página inicial */
-.secao-inicio {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-/* Cartão de Apresentação (Hero Card) */
-.hero-card {
-    background-color: #495057;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-
-/* Etiqueta de boas-vindas */
-.badge-ola {
-    display: inline-block;
-    background-color: #343A40;
-    color: #FFAFCC;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    border: 1px solid #FFAFCC;
-}
-
-.hero-card h1 {
-    font-size: 28px;
-    color: #FEEAC7;
-    background: none;
-    margin-bottom: 15px;
-}
-
-.descricao-inicio {
-    color: #CED4DA;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.descricao-inicio strong {
-    color: #FFAFCC;
-}
-
-/* Botões de Ação Interativos */
-.acoes-hero {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
 }
 
 .btn-principal {
@@ -633,58 +107,222 @@ footer {
     transform: translateY(-3px);
 }
 
-/* Seção de Soft Skills / Gostos na Home */
-.gostos-container {
-    background-color: #495057;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+/* ==========================================
+   5. PÁGINA INICIAL (INDEX)
+   ========================================== */
+.secao-inicio {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.gostos-container h3 {
-    color: #FEEAC7;
-    font-size: 18px;
-    margin-bottom: 15px;
+.hero-card {
+    background-color: #495057;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
-.gostos {
-    display: flex;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.gostos li {
+.badge-ola {
+    display: inline-block;
     background-color: #343A40;
+    color: #FFAFCC;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #FFAFCC;
+}
+
+.hero-card h1 {
+    font-size: 28px;
     color: #FEEAC7;
-    padding: 10px 16px;
-    border-radius: 30px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid #6C757D;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    background: none;
+    margin-bottom: 15px;
 }
 
-.gostos li:hover {
-    transform: translateY(-2px);
-    border-color: #FFAFCC;
+.descricao-inicio {
+    color: #CED4DA;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
 }
 
-.gostos i {
+.descricao-inicio strong {
     color: #FFAFCC;
 }
-/* Container principal da seção de projetos */
-.secao-projetos {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 0 20px;
+
+.acoes-hero {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
+/* ==========================================
+   6. PÁGINA SOBRE (PERFIL E HABILIDADES)
+   ========================================== */
+.secao-sobre-mim, 
+.secao-habilidades {
+    margin: 40px auto;
+}
+
+.secao-sobre-mim h1,
+.secao-habilidades h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    background: none;
+    color: #FEEAC7;
+    font-size: 24px;
+}
+
+.card-perfil {
+    background-color: #495057;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.foto-sobre {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #FFAFCC;
+    display: block;
+    margin: 20px auto;
+}
+
+.texto-perfil p {
+    color: #CED4DA;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.lista-habilidades-moderna,
+.lista-hard-skills {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lista-habilidades-moderna li,
+.lista-hard-skills li {
+    background-color: #495057;
+    padding: 18px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.lista-habilidades-moderna li:hover,
+.lista-hard-skills li:hover {
+    transform: translateY(-3px);
+}
+
+.lista-habilidades-moderna i,
+.lista-hard-skills i {
+    font-size: 24px;
+    color: #FFAFCC;
+    background-color: #343A40;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.lista-habilidades-moderna strong,
+.lista-hard-skills strong {
+    color: #FEEAC7;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.lista-habilidades-moderna p,
+.lista-hard-skills p {
+    margin: 0;
+    color: #CED4DA;
+    font-size: 14px;
+}
+
+.titulo-hard-skills {
+    margin-top: 40px !important;
+}
+
+/* ==========================================
+   7. SEÇÃO DE CERTIFICADOS
+   ========================================== */
+.secao-certificados {
+    padding: 20px;
+    background-color: #495057;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+}
+
+.secao-certificados h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #b224be;
+}
+
+.subtitulo-certificados {
+    color: #CED4DA;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.lista-certificados {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-certificados li {
+    padding: 16px 0;
+    border-bottom: 1px solid rgb(0, 204, 231);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.curso-nome {
+    font-weight: bold;
+}
+
+.instituicao {
+    color: #CED4DA;
+    font-size: 13px;
+}
+
+.btn-pdf {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-pdf:hover {
+    background-color: #6F1D1B;
+}
+
+/* ==========================================
+   8. PÁGINA DE PROJETOS
+   ========================================== */
 .secao-projetos h1 {
     text-align: center;
     margin-bottom: 5px;
@@ -700,14 +338,12 @@ footer {
     margin-bottom: 30px;
 }
 
-/* Organização dos cards em lista flexível */
 .projetos-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Estilo de cada card de projeto */
 .card-projeto {
     background-color: #495057;
     padding: 24px;
@@ -724,7 +360,6 @@ footer {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
-/* Ícone lateral do projeto */
 .projeto-icone {
     background-color: #9A031E;
     color: #FFFFFF;
@@ -738,7 +373,6 @@ footer {
     flex-shrink: 0;
 }
 
-/* Informações do texto do projeto */
 .projeto-info h2 {
     font-size: 18px;
     color: #FFAFCC;
@@ -752,7 +386,6 @@ footer {
     margin: 0 0 15px 0;
 }
 
-/* Botão interativo para acessar o projeto */
 .btn-projeto {
     display: inline-flex;
     align-items: center;
@@ -772,10 +405,9 @@ footer {
     background-color: #9A031E;
     border-color: #9A031E;
     color: #FFFFFF;
-    transform: translateX(3px); /* Dá um leve empurrãozinho para a direita */
+    transform: translateX(3px);
 }
 
-/* Badge indicativo para projetos sem link externo */
 .badge-tech {
     display: inline-block;
     background-color: #343A40;
@@ -786,51 +418,324 @@ footer {
     border-radius: 20px;
     border: 1px solid #FFAFCC;
 }
-/* Espaçamento e título para as Hard Skills */
-.titulo-hard-skills {
-    margin-top: 40px !important;
+
+/* ==========================================
+   9. PÁGINA DE CONTATO E FORMAÇÃO
+   ========================================== */
+.secao-contato,
+.secao-formacao {
+    margin: 40px auto;
 }
 
-/* Estilo da lista de Hard Skills (mesmo padrão moderno das Soft Skills) */
-.lista-hard-skills {
-    list-style: none;
-    padding: 0;
+.secao-contato h1,
+.secao-formacao h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    background: none;
+    color: #FEEAC7;
+}
+
+.contato-container {
+    background-color: #495057;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.subtitulo {
+    text-align: center;
+    color: #CED4DA;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.campo-grupo {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
-.lista-hard-skills li {
+.campo-grupo label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #FEEAC7;
+}
+
+.campo-grupo input,
+.campo-grupo select,
+.campo-grupo textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #343A40;
+    border: 2px solid #6C757D;
+    border-radius: 8px;
+    color: #FEEAC7;
+    font-size: 15px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus,
+.campo-grupo textarea:focus {
+    outline: none;
+    border-color: #FFAFCC;
+    box-shadow: 0 0 8px rgba(255, 175, 204, 0.4);
+}
+
+.btn-enviar {
+    width: 100%;
+    padding: 14px;
+    background-color: #9A031E;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background-color: #720216;
+    transform: translateY(-2px);
+}
+
+.formacao-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card-formacao {
     background-color: #495057;
-    padding: 18px 20px;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-formacao:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.icone-formacao {
+    background-color: #9A031E;
+    color: #FFFFFF;
+    width: 60px;
+    height: 60px;
     border-radius: 12px;
     display: flex;
     align-items: center;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.lista-hard-skills li:hover {
-    transform: translateY(-3px);
-}
-
-.lista-hard-skills i {
+    justify-content: center;
     font-size: 24px;
+    flex-shrink: 0;
+}
+
+.conteudo-formacao h2 {
+    font-size: 18px;
     color: #FFAFCC;
-    background-color: #343A40;
-    padding: 12px;
-    border-radius: 10px;
+    margin: 0 0 4px 0;
 }
 
-.lista-hard-skills strong {
+.conteudo-formacao h3 {
+    font-size: 16px;
     color: #FEEAC7;
-    display: block;
-    margin-bottom: 4px;
+    margin: 0 0 10px 0;
+    font-weight: normal;
 }
 
-.lista-hard-skills p {
-    margin: 0;
-    color: #CED4DA;
+.status-badge {
+    display: inline-block;
+    background-color: #343A40;
+    color: #FFAFCC;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    border: 1px solid #FFAFCC;
+}
+
+.previsao {
     font-size: 14px;
+    color: #CED4DA;
+    margin: 0;
+}
+
+/* ==========================================
+   10. ANIMAÇÃO E GATOS FLUTUANTES
+   ========================================== */
+.gatos-flutuantes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.gato {
+    position: absolute;
+    bottom: -50px;
+    left: var(--left, 50%);
+    font-size: 2rem;
+    opacity: 0;
+    animation: pulsarESumir 4s ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes pulsarESumir {
+    0% { transform: translateY(20px) scale(0.8); opacity: 0; }
+    25% { opacity: 0.9; transform: translateY(-30px) scale(1.1); }
+    50% { transform: translateY(0px) scale(1); opacity: 0.9; }
+    75% { opacity: 0; transform: translateY(-10px) scale(0.9); }
+    100% { opacity: 0; }
+}
+
+/* ==========================================
+   11. RODAPÉ (FOOTER)
+   ========================================== */
+footer {
+    background-color: #212529;
+    color: #FEEAC7;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    border-top: 1px solid #FFAFCC;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.footer-links a {
+    color: #FEEAC7;
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFAFCC;
+    transform: scale(1.2);
+}
+
+/* ==========================================
+   12. RESPONSIVIDADE (CELULARES)
+   ========================================== */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+}
+/* ==========================================
+   ANIMAÇÃO DOS GATINHOS NO RODAPÉ (DISCRETA)
+   ========================================== */
+footer {
+    position: relative; /* Necessário para posicionar os gatinhos dentro dele */
+    overflow: hidden;
+}
+
+.gatos-rodape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    pointer-events: none; /* Permite clicar nos links do footer normalmente */
+    z-index: 1;
+}
+
+.gato-andando {
+    position: absolute;
+    font-size: 1.3rem;
+    animation: caminhar 18s linear infinite;
+    opacity: 0.5; /* Suave, estilo marca d'água */
+}
+
+@keyframes caminhar {
+    0% {
+        left: -40px;
+        transform: scaleX(1); /* Caminha para a direita */
+    }
+    49% {
+        transform: scaleX(1);
+    }
+    50% {
+        left: 102%;
+        transform: scaleX(-1); /* Vira para a esquerda na metade */
+    }
+    99% {
+        transform: scaleX(-1);
+    }
+    100% {
+        left: -40px;
+        transform: scaleX(1);
+    }
+}
+/* ==========================================
+   ANIMAÇÃO DOS GATINHOS NO RODAPÉ
+   ========================================== */
+footer {
+    position: relative; /* Mantém o rodapé como base para os gatinhos */
+    overflow: hidden;   /* Esconde o gatinho quando ele sai da tela */
+}
+
+.gatos-rodape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    pointer-events: none; /* Deixa o mouse passar direto pelos gatinhos para poder clicar nos links */
+    z-index: 1;
+}
+
+.gato-andando {
+    position: absolute;
+    font-size: 1.3rem;
+    bottom: 5px;
+    animation: caminhar 18s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes caminhar {
+    0% {
+        left: -40px;
+        transform: scaleX(1); /* Olhando para a direita */
+    }
+    49% {
+        transform: scaleX(1);
+    }
+    50% {
+        left: 102%;
+        transform: scaleX(-1); /* Vira para a esquerda ao chegar no fim */
+    }
+    99% {
+        transform: scaleX(-1);
+    }
+    100% {
+        left: -40px;
+        transform: scaleX(1);
+    }
 }
