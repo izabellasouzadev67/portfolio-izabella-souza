@@ -1,17 +1,17 @@
 /* ==========================================================
-   VALIDAÇÃO E INTERATIVIDADE DO FORMULÁRIO DE CONTATO
+   VALIDAÇÃO E ENVIO REAL DO FORMULÁRIO DE CONTATO (FORMSPREE)
    ========================================================== */
 const formulario = document.querySelector("#formulario");
 const resposta = document.querySelector("#resposta");
 
-// Só executa se o formulário existir na página (evita erro em outras páginas)
+// Só executa se o formulário existir na página
 if (formulario && resposta) {
     const campoNome = document.querySelector("#nome");
-    const campoEmail = document.querySelector("#email"); // Caso tenha campo de e-mail
+    const campoEmail = document.querySelector("#email");
     const campoMensagem = document.querySelector("#mensagem");
     const MINIMO = 100;
 
-    // Criando dinamicamente um elemento para mostrar o contador de caracteres em tempo real
+    // Criando dinamicamente o contador de caracteres em tempo real
     const contadorVisual = document.createElement("small");
     contadorVisual.style.display = "block";
     contadorVisual.style.marginTop = "6px";
@@ -31,7 +31,6 @@ if (formulario && resposta) {
             contadorVisual.style.color = "#70E000"; // Verde indicando sucesso
         }
 
-        // Some com a mensagem de erro geral assim que a pessoa volta a digitar
         if (resposta.classList.contains("erro")) {
             resposta.textContent = "";
             resposta.classList.remove("erro");
@@ -39,12 +38,12 @@ if (formulario && resposta) {
     });
 
     function mostrarResposta(texto, tipo) {
-        resposta.textContent = texto; // textContent evita injeção de HTML
+        resposta.textContent = texto;
         resposta.classList.remove("erro", "sucesso");
         resposta.classList.add(tipo);
     }
 
-    formulario.addEventListener("submit", (evento) => {
+    formulario.addEventListener("submit", async (evento) => {
         evento.preventDefault();
 
         const nome = campoNome.value.trim();
@@ -66,8 +65,31 @@ if (formulario && resposta) {
             return;
         }
 
-        mostrarResposta(`Obrigada, ${nome}! Sua mensagem foi enviada com sucesso.`, "sucesso");
-        formulario.reset();
-        contadorVisual.textContent = ""; // Limpa o contador após o envio
+        mostrarResposta("Enviando mensagem...", "sucesso");
+
+        try {
+            const response = await fetch("https://formspree.io/f/myewewpo", {
+                method: "POST",
+                body: new FormData(formulario),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                mostrarResposta(`Obrigada, ${nome}! Sua mensagem foi enviada com sucesso.`, "sucesso");
+                formulario.reset();
+                contadorVisual.textContent = ""; // Limpa o contador após o envio
+            } else {
+                const data = await response.json();
+                if (data.errors) {
+                    mostrarResposta(data.errors.map(err => err.message).join(", "), "erro");
+                } else {
+                    mostrarResposta("Ocorreu um erro ao enviar a mensagem. Tente novamente.", "erro");
+                }
+            }
+        } catch (error) {
+            mostrarResposta("Erro de conexão. Verifique sua internet.", "erro");
+        }
     });
 }
