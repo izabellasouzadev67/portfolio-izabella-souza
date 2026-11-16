@@ -6,7 +6,6 @@
     <title>Contato | Izabella</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Novo ficheiro CSS exclusivo para os gatinhos (evita conflitos no tema) -->
     <link rel="stylesheet" href="css/gatos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -29,7 +28,7 @@
                 <h1>Contato</h1>
                 <p class="subtitulo">Fale comigo preenchendo o formulário abaixo:</p>
 
-                <form id="formulario" class="formulario-moderno">
+                <form id="form-contato" action="https://formspree.io/f/myewewpo" method="POST" class="formulario-moderno">
                     <div class="campo-grupo">
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
@@ -58,7 +57,8 @@
 
                     <div class="campo-grupo">
                         <label for="mensagem">Mensagem</label>
-                        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui... (Mínimo de 100 caracteres)"></textarea>
+                        <textarea id="mensagem" name="mensagem" rows="5" maxlength="500" placeholder="Escreva sua mensagem aqui... (Mínimo de 100 caracteres)" required></textarea>
+                        <p class="aviso-caracteres" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.8;"><span id="contador">500</span> caracteres restantes</p>
                     </div>
 
                     <button type="submit" class="btn-enviar">Enviar Mensagem</button>
@@ -68,7 +68,7 @@
         </section>
     </main>
 
-  <footer>
+    <footer>
         <div class="footer-container">
             <p>Minhas redes sociais</p>
             <ul class="footer-links">
@@ -78,14 +78,14 @@
             </ul>
         </div>
 
-        <!-- Stickers dos gatinhos passeando no rodapé com tamanho travado -->
-    <div class="gatos-rodape">
-        <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
-        <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
-    </div>
+        <div class="gatos-rodape">
+            <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
+            <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
+        </div>
 
         <p>&copy; 2026 Izabella Souza Matos. Todos os direitos reservados.</p>
     </footer>
-     <script src="js/script.js"></script>
-     </body>
+
+    <script src="js/contato.js"></script>
+</body>
 </html>

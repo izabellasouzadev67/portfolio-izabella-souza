@@ -1,95 +1,68 @@
-/* ==========================================================
-   VALIDAÇÃO E ENVIO REAL DO FORMULÁRIO DE CONTATO (FORMSPREE)
-   ========================================================== */
-const formulario = document.querySelector("#formulario");
-const resposta = document.querySelector("#resposta");
+// ==========================================
+// SCRIPT DA PÁGINA DE CONTATO
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Contador de Caracteres
+    const mensagemInput = document.getElementById('mensagem');
+    const contadorSpan = document.getElementById('contador');
+    const limiteMaximo = 500;
 
-// Só executa se o formulário existir na página
-if (formulario && resposta) {
-    const campoNome = document.querySelector("#nome");
-    const campoEmail = document.querySelector("#email");
-    const campoMensagem = document.querySelector("#mensagem");
-    const MINIMO = 100;
-
-    // Criando dinamicamente o contador de caracteres em tempo real
-    const contadorVisual = document.createElement("small");
-    contadorVisual.style.display = "block";
-    contadorVisual.style.marginTop = "6px";
-    contadorVisual.style.color = "#CED4DA";
-    campoMensagem.parentNode.appendChild(contadorVisual);
-
-    // Atualiza o contador enquanto o usuário digita
-    campoMensagem.addEventListener("input", () => {
-        const digitados = campoMensagem.value.length;
-        const faltam = MINIMO - digitados;
-
-        if (faltam > 0) {
-            contadorVisual.textContent = `Faltam ${faltam} caracteres (Mínimo de ${MINIMO}).`;
-            contadorVisual.style.color = "#FFAFCC";
-        } else {
-            contadorVisual.textContent = `Tamanho ideal alcançado! (${digitados} caracteres)`;
-            contadorVisual.style.color = "#70E000"; // Verde indicando sucesso
-        }
-
-        if (resposta.classList.contains("erro")) {
-            resposta.textContent = "";
-            resposta.classList.remove("erro");
-        }
-    });
-
-    function mostrarResposta(texto, tipo) {
-        resposta.textContent = texto;
-        resposta.classList.remove("erro", "sucesso");
-        resposta.classList.add(tipo);
+    if (mensagemInput && contadorSpan) {
+        mensagemInput.addEventListener('input', () => {
+            const caracteresAtuais = mensagemInput.value.length;
+            const caracteresRestantes = limiteMaximo - caracteresAtuais;
+            contadorSpan.textContent = caracteresRestantes;
+        });
     }
 
-    formulario.addEventListener("submit", async (evento) => {
-        evento.preventDefault();
+    // 2. Envio do Formulário via Formspree com Feedback
+    const formContato = document.getElementById('form-contato');
+    const respostaP = document.getElementById('resposta'); // O <p id="resposta"></p> que já tens no teu HTML
 
-        const nome = campoNome.value.trim();
-        const mensagem = campoMensagem.value.trim();
+    if (formContato) {
+        formContato.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Impede o recarregamento brusco da página
 
-        if (nome === "") {
-            mostrarResposta("Por favor, digite seu nome.", "erro");
-            campoNome.focus();
-            return;
-        }
+            const formData = new FormData(formContato);
 
-        if (mensagem.length < MINIMO) {
-            const faltam = MINIMO - mensagem.length;
-            mostrarResposta(
-                `A mensagem é muito curta. Faltam ${faltam} caracteres.`,
-                "erro"
-            );
-            campoMensagem.focus();
-            return;
-        }
+            try {
+                const response = await fetch(formContato.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
 
-        mostrarResposta("Enviando mensagem...", "sucesso");
+                if (response.ok) {
+                    // Mostra a mensagem de sucesso no elemento <p id="resposta">
+                    if (respostaP) {
+                        respostaP.textContent = "Sua mensagem foi enviada com sucesso! 🎉";
+                        respostaP.style.color = "#4ade80";
+                        respostaP.style.display = "block";
+                    } else {
+                        alert('Sua mensagem foi enviada com sucesso! 🎉');
+                    }
 
-        try {
-            const response = await fetch("https://formspree.io/f/myewewpo", {
-                method: "POST",
-                body: new FormData(formulario),
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
+                    // Limpa o formulário e reinicia o contador
+                    formContato.reset();
+                    if (contadorSpan) {
+                        contadorSpan.textContent = limiteMaximo;
+                    }
 
-            if (response.ok) {
-                mostrarResposta(`Obrigada, ${nome}! Sua mensagem foi enviada com sucesso.`, "sucesso");
-                formulario.reset();
-                contadorVisual.textContent = ""; // Limpa o contador após o envio
-            } else {
-                const data = await response.json();
-                if (data.errors) {
-                    mostrarResposta(data.errors.map(err => err.message).join(", "), "erro");
+                    // Esconde a mensagem após 6 segundos
+                    if (respostaP) {
+                        setTimeout(() => {
+                            respostaP.style.display = 'none';
+                        }, 6000);
+                    }
                 } else {
-                    mostrarResposta("Ocorreu um erro ao enviar a mensagem. Tente novamente.", "erro");
+                    alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
                 }
+            } catch (error) {
+                alert('Erro de conexão. Verifique a sua internet e tente novamente.');
             }
-        } catch (error) {
-            mostrarResposta("Erro de conexão. Verifique sua internet.", "erro");
-        }
-    });
-}
+        });
+    }
+});
