@@ -64,43 +64,25 @@ if (botao) {
     });
 }
 
-/* ==========================================================
-2B. MENU HAMBÚRGUER RESPONSIVO
-   ========================================================== */
-const btnHamburguer = document.querySelector("#btn-hamburguer");
-const navMenu = document.querySelector("#nav-menu");
+const btnHamburguer = document.getElementById("btn-hamburguer");
+const navMenu = document.getElementById("nav-menu");
 
 if (btnHamburguer && navMenu) {
-    function toggleMenuMobile(forcar) {
-        const abrir = forcar === undefined ? !navMenu.classList.contains("aberto") : forcar;
-        navMenu.classList.toggle("aberto", abrir);
-        btnHamburguer.classList.toggle("aberto", abrir);
-        btnHamburguer.setAttribute("aria-expanded", abrir ? "true" : "false");
-    }
-
-    // Abre ou fecha ao clicar no botão
-    btnHamburguer.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleMenuMobile();
+    btnHamburguer.addEventListener("click", () => {
+        const estaAberto = navMenu.classList.toggle("aberto");
+        btnHamburguer.classList.toggle("aberto", estaAberto);
+        btnHamburguer.setAttribute("aria-expanded", estaAberto ? "true" : "false");
     });
 
-    // Fecha ao clicar em qualquer link do menu
-    document.querySelectorAll("#nav-menu a").forEach((link) => {
-        link.addEventListener("click", () => toggleMenuMobile(false));
-    });
-
-    // Fecha ao clicar fora do menu
-    document.addEventListener("click", (e) => {
-        if (
-            navMenu.classList.contains("aberto") &&
-            !navMenu.contains(e.target) &&
-            !btnHamburguer.contains(e.target)
-        ) {
-            toggleMenuMobile(false);
-        }
+    // Fecha o menu ao clicar em um link (útil no celular)
+    navMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("aberto");
+            btnHamburguer.classList.remove("aberto");
+            btnHamburguer.setAttribute("aria-expanded", "false");
+        });
     });
 }
-
 /* ==========================================================
 3. LISTA DE SOFT SKILLS DINÂMICA
    (Só roda se existir #gostos na página)
