@@ -5,34 +5,56 @@
 document.addEventListener("DOMContentLoaded", () => {
     const listaProjetos = document.querySelector("#lista-projetos");
     const contagem = document.querySelector("#contagem");
-    let todos = [];
 
-    const projetosLocais = [
+    const projetos = [
         {
-            titulo: "Protótipos do Figma",
+            titulo: "Protótipo Figma",
             descricao: "Criação das telas e identidade visual estruturadas para o desenvolvimento deste portfólio.",
             categoria: "figma",
-            link: "https://www.figma.com"
+            link: "https://www.figma.com/files/team/1687251064527399275/folder/663341080?fuid=1687251063166864576",
+            icone: '<i class="fa-brands fa-figma"></i>'
         },
         {
-            titulo: "Página Sobre Mim",
-            descricao: "Minha primeira página desenvolvida em HTML, CSS e JavaScript.",
+            titulo: "Minha página sobre mim",
+            descricao: "Minha primeira página desenvolvida em HTML, CSS e JavaScript, estruturando a base da programação web.",
             categoria: "pagina-sobre-mim",
-            link: "sobre.html"
+            link: "sobre.html",
+            icone: '<i class="fa-solid fa-user"></i>'
+        },
+        {
+            titulo: "Site de Turismo",
+            descricao: "Projeto em grupo para divulgar pontos turísticos e rotas acessíveis, utilizando HTML, CSS e JavaScript para interatividade.",
+            categoria: "turismo",
+            link: "",
+            icone: '<i class="fa-solid fa-tree"></i>'
         },
         {
             titulo: "Lâmpada Interativa",
-            descricao: "Mini projeto utilizando HTML, CSS puro e JavaScript.",
+            descricao: "Mini projeto de uma lâmpada interativa utilizando HTML, CSS puro e JavaScript.",
             categoria: "lampada",
-            link: "https://github.com/izabellasouzadev67/lampada"
+            link: "https://github.com/izabellasouzadev67/lampada",
+            icone: '<i class="fa-solid fa-lightbulb"></i>'
         },
         {
             titulo: "Calculadora Básica",
-            descricao: "Mini projeto de calculadora básica em Front-End.",
+            descricao: "Mini projeto de uma calculadora básica utilizando HTML, CSS puro e JavaScript.",
             categoria: "calculadora",
-            link: "https://github.com/izabellasouzadev67/calculadora"
+            link: "https://github.com/izabellasouzadev67/calculadora",
+            icone: '<i class="fa-solid fa-calculator"></i>'
         }
     ];
+
+    function obterIcone(projeto) {
+        if (projeto.icone) return projeto.icone;
+
+        const texto = `${projeto.categoria || ""} ${projeto.titulo || ""}`.toLowerCase();
+        if (texto.includes("figma")) return '<i class="fa-brands fa-figma"></i>';
+        if (texto.includes("lampada") || texto.includes("lâmpada")) return '<i class="fa-solid fa-lightbulb"></i>';
+        if (texto.includes("calculadora")) return '<i class="fa-solid fa-calculator"></i>';
+        if (texto.includes("turismo")) return '<i class="fa-solid fa-tree"></i>';
+        if (texto.includes("sobre")) return '<i class="fa-solid fa-user"></i>';
+        return '<i class="fa-solid fa-code"></i>';
+    }
 
     function criarCard(projeto) {
         if (!listaProjetos) return;
@@ -42,13 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const iconeDiv = document.createElement("div");
         iconeDiv.classList.add("projeto-icone");
-        iconeDiv.innerHTML = '<i class="fa-solid fa-code"></i>';
+        iconeDiv.innerHTML = obterIcone(projeto);
 
         const infoDiv = document.createElement("div");
         infoDiv.classList.add("projeto-info");
 
         const tituloEl = document.createElement("h2");
-        tituloEl.textContent = projeto.titulo || projeto.título;
+        tituloEl.textContent = projeto.titulo;
 
         const textoEl = document.createElement("p");
         textoEl.textContent = projeto.descricao;
@@ -56,15 +78,16 @@ document.addEventListener("DOMContentLoaded", () => {
         infoDiv.appendChild(tituloEl);
         infoDiv.appendChild(textoEl);
 
-        if (projeto.link) {
-            const link = document.createElement("a");
-            link.href = projeto.link;
+        const urlProjeto = projeto.link || "#";
+        const link = document.createElement("a");
+        link.href = urlProjeto;
+        if (urlProjeto.startsWith("http")) {
             link.target = "_blank";
             link.rel = "noopener noreferrer";
-            link.className = "btn-projeto";
-            link.innerHTML = 'Ver Projeto <i class="fa-solid fa-arrow-right"></i>';
-            infoDiv.appendChild(link);
         }
+        link.className = "btn-projeto";
+        link.innerHTML = 'Ver Projeto <i class="fa-solid fa-arrow-right"></i>';
+        infoDiv.appendChild(link);
 
         card.appendChild(iconeDiv);
         card.appendChild(infoDiv);
@@ -80,48 +103,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (contagem) {
-            const titulos = lista.map((projeto) => projeto.titulo || projeto.título);
+            const titulos = lista.map((projeto) => projeto.titulo);
             contagem.textContent = `${lista.length} projetos exibidos: ${titulos.join(", ")}`;
         }
     };
 
     const filtrar = (categoria) => {
-        const lista = todos.filter((projeto) => projeto.categoria === categoria);
+        const lista = projetos.filter((projeto) => projeto.categoria === categoria);
         mostrar(lista);
     };
 
-    fetch("projeto.json")
-        .then((resposta) => {
-            if (!resposta.ok) throw new Error("Arquivo json não encontrado");
-            return resposta.json();
-        })
-        .then((projetos) => {
-            todos = projetos;
-            mostrar(todos);
-        })
-        .catch((erro) => {
-            console.log("Usando dados locais de projetos:", erro);
-            todos = projetosLocais;
-            mostrar(todos);
-        });
+    // Exibe todos inicialmente
+    mostrar(projetos);
 
     /* ==========================================================
        CONFIGURAÇÃO DOS BOTÕES DE FILTRO
        ========================================================== */
     const botaoTodos = document.querySelector("#filtro-todos");
-    const botaoPaginaSobreMim = document.querySelector("#filtro-pagina-sobre-mim") || document.querySelector("#filtro-página-sobre-mim");
+    const botaoPaginaSobreMim =
+        document.querySelector("#filtro-pagina-sobre-mim") ||
+        document.querySelector("#filtro-página-sobre-mim");
     const botaoFigma = document.querySelector("#filtro-figma");
     const botaoLampada = document.querySelector("#filtro-lampada");
     const botaoCalculadora = document.querySelector("#filtro-calculadora");
 
-    if (botaoTodos) botaoTodos.addEventListener("click", () => mostrar(todos));
+    if (botaoTodos) botaoTodos.addEventListener("click", () => mostrar(projetos));
     if (botaoPaginaSobreMim) {
-        botaoPaginaSobreMim.addEventListener("click", () => {
-            const filtrados = todos.filter(
-                (p) => p.categoria === "pagina-sobre-mim" || p.categoria === "página-sobre-mim"
-            );
-            mostrar(filtrados);
-        });
+        botaoPaginaSobreMim.addEventListener("click", () => filtrar("pagina-sobre-mim"));
     }
     if (botaoFigma) botaoFigma.addEventListener("click", () => filtrar("figma"));
     if (botaoLampada) botaoLampada.addEventListener("click", () => filtrar("lampada"));

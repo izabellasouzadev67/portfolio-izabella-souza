@@ -1,5 +1,5 @@
 /* ==========================================================
-   1. SAUDAÇÃO AUTOMÁTICA POR HORÁRIO
+1. SAUDAÇÃO AUTOMÁTICA POR HORÁRIO
    (Só roda na página que tem #titulo-saudacao)
    ========================================================== */
 const tituloSaudacao = document.querySelector("#titulo-saudacao");
@@ -20,7 +20,7 @@ if (tituloSaudacao) {
 }
 
 /* ==========================================================
-   2. TEMA CLARO / ESCURO
+2. TEMA CLARO / ESCURO
    (O site é escuro por padrão; a classe "claro" no body ativa o claro)
    ========================================================== */
 const botao = document.querySelector("#tema");
@@ -63,28 +63,46 @@ if (botao) {
         salvarTema(virouClaro ? "claro" : "escuro");
     });
 }
-// ------------------------------------------
-    // 2. MENU HAMBÚRGUER (Mobile)
-    // ------------------------------------------
-    const botaoMenu = document.getElementById('menu-hamburguer');
-    const menuNav = document.getElementById('menu-nav');
-
-    if (botaoMenu && menuNav) {
-        botaoMenu.addEventListener('click', () => {
-            const estaAberto = menuNav.classList.toggle('ativo');
-            botaoMenu.setAttribute('aria-expanded', estaAberto);
-        });
-
-        menuNav.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => {
-                menuNav.classList.remove('ativo');
-                botaoMenu.setAttribute('aria-expanded', 'false');
-            });
-        });
-    }
 
 /* ==========================================================
-   3. LISTA DE SOFT SKILLS DINÂMICA
+2B. MENU HAMBÚRGUER RESPONSIVO
+   ========================================================== */
+const btnHamburguer = document.querySelector("#btn-hamburguer");
+const navMenu = document.querySelector("#nav-menu");
+
+if (btnHamburguer && navMenu) {
+    function toggleMenuMobile(forcar) {
+        const abrir = forcar === undefined ? !navMenu.classList.contains("aberto") : forcar;
+        navMenu.classList.toggle("aberto", abrir);
+        btnHamburguer.classList.toggle("aberto", abrir);
+        btnHamburguer.setAttribute("aria-expanded", abrir ? "true" : "false");
+    }
+
+    // Abre ou fecha ao clicar no botão
+    btnHamburguer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleMenuMobile();
+    });
+
+    // Fecha ao clicar em qualquer link do menu
+    document.querySelectorAll("#nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => toggleMenuMobile(false));
+    });
+
+    // Fecha ao clicar fora do menu
+    document.addEventListener("click", (e) => {
+        if (
+            navMenu.classList.contains("aberto") &&
+            !navMenu.contains(e.target) &&
+            !btnHamburguer.contains(e.target)
+        ) {
+            toggleMenuMobile(false);
+        }
+    });
+}
+
+/* ==========================================================
+3. LISTA DE SOFT SKILLS DINÂMICA
    (Só roda se existir #gostos na página)
    ========================================================== */
 const gostos = [
@@ -105,7 +123,7 @@ if (lista) {
 }
 
 /* ==========================================================
-   4. BOTÃO "VOLTAR AO TOPO" (SMOOTH SCROLL)
+4. BOTÃO "VOLTAR AO TOPO" (SMOOTH SCROLL)
    ========================================================== */
 const btnTopo = document.createElement("button");
 btnTopo.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
@@ -160,7 +178,7 @@ btnTopo.addEventListener("mouseleave", () => {
 });
 
 /* ==========================================================
-   5. EFEITO DE DIGITAÇÃO NO TÍTULO PRINCIPAL (HERO)
+5. EFEITO DE DIGITAÇÃO NO TÍTULO PRINCIPAL (HERO)
    ========================================================== */
 const elementoDigitacao = document.querySelector(".hero-card h1");
 
@@ -173,23 +191,23 @@ if (elementoDigitacao) {
         if (i < textoOriginal.length) {
             elementoDigitacao.textContent += textoOriginal.charAt(i);
             i++;
-            setTimeout(digitar, 65); // Velocidade de digitação
+            setTimeout(digitar, 65);
         }
     }
 
-    setTimeout(digitar, 400); // Delay inicial antes de começar a digitar
+    setTimeout(digitar, 400);
 }
 
 /* ==========================================================
-   6. DESTAQUE AUTOMÁTICO DO MENU ATIVO
+6. DESTAQUE AUTOMÁTICO DO MENU ATIVO
    ========================================================== */
 const paginaAtual = window.location.pathname.split("/").pop() || "index.html";
 const linksMenu = document.querySelectorAll(".itensnav a");
 
-linksMenu.forEach(link => {
+linksMenu.forEach((link) => {
     const hrefLink = link.getAttribute("href");
     if (hrefLink === paginaAtual) {
-        link.style.color = "#FFAFCC"; // Cor de destaque do tema
+        link.style.color = "#FFAFCC";
         link.style.fontWeight = "bold";
     }
 });

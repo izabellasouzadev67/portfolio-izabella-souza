@@ -4,30 +4,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // ------------------------------------------
-    // 0. MODO CLARO / ESCURO (Funciona em todas as páginas)
-    // ------------------------------------------
-    const botaoTema = document.getElementById('tema');
-
-    if (botaoTema) {
-        if (localStorage.getItem('tema') === 'escuro') {
-            document.body.classList.add('modo-escuro');
-            botaoTema.textContent = 'Modo claro';
-        }
-
-        botaoTema.addEventListener('click', () => {
-            document.body.classList.toggle('modo-escuro');
-
-            if (document.body.classList.contains('modo-escuro')) {
-                botaoTema.textContent = 'Modo claro';
-                localStorage.setItem('tema', 'escuro');
-            } else {
-                botaoTema.textContent = 'Modo escuro';
-                localStorage.setItem('tema', 'claro');
-            }
-        });
-    }
-
-    // ------------------------------------------
     // 1. CONTADOR DE CARACTERES
     // ------------------------------------------
     const mensagemInput = document.getElementById('mensagem');

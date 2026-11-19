@@ -1,6 +1,22 @@
 /* ==========================================
-   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
+1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
    ========================================== */
+:root {
+    --header-bg: #ff7f50;
+    --header-border: rgba(255, 175, 204, 0.45);
+    --btn-tema-bg: #343A40;
+    --btn-tema-border: #FFAFCC;
+    --btn-tema-color: #FEEAC7;
+}
+
+body.modo-escuro {
+    --header-bg: #212529;
+    --header-border: rgba(255, 175, 204, 0.35);
+    --btn-tema-bg: #495057;
+    --btn-tema-border: #FFAFCC;
+    --btn-tema-color: #FEEAC7;
+}
+
 body {
     background-color: #343A40;
     color: #FEEAC7;
@@ -15,53 +31,69 @@ main {
 }
 
 /* ==========================================
-   2. HEADER E NAVEGAÇÃO
+2. HEADER E NAVEGAÇÃO
    ========================================== */
 header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: coral;
-    padding: 10px 20px;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
+    padding: 12px 20px;
+    z-index: 1000;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    background-color: #e99292;
-    padding: 10px 0;
+.titlenav {
+    margin: 0;
+    font-size: 1.05rem;
 }
 
 nav a {
-    color: #9A031E;
+    color: #FEEAC7;
     text-decoration: none;
-    margin-right: 15px;
     display: inline-block;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
-    color: #ff8a4c;
+    color: #FFAFCC;
+}
+
+#tema {
+    background-color: var(--btn-tema-bg);
+    color: var(--btn-tema-color);
+    border: 1px solid var(--btn-tema-border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#tema:hover {
+    transform: translateY(-1px);
 }
 
 /* ==========================================
-   3. TÍTULOS E TIPOGRAFIA
+3. TÍTULOS E TIPOGRAFIA
    ========================================== */
 h1 {
     color: #5F0F40;
     font-size: 24px;
     font-weight: 100;
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
     background-color: #D9C5B2;
     border-radius: 40px;
-    display: inline-block; 
+    display: inline-block;
 }
 
 /* ==========================================
-   4. COMPONENTES: CARDS E BOTÕES
+4. COMPONENTES: CARDS E BOTÕES
    ========================================== */
 article {
-    background-color: #495057; 
+    background-color: #495057;
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
@@ -108,7 +140,7 @@ article:hover {
 }
 
 /* ==========================================
-   5. PÁGINA INICIAL (INDEX)
+5. PÁGINA INICIAL (INDEX)
    ========================================== */
 .secao-inicio {
     display: flex;
@@ -162,9 +194,9 @@ article:hover {
 }
 
 /* ==========================================
-   6. PÁGINA SOBRE (PERFIL E HABILIDADES)
+6. PÁGINA SOBRE (PERFIL E HABILIDADES)
    ========================================== */
-.secao-sobre-mim, 
+.secao-sobre-mim,
 .secao-habilidades {
     margin: 40px auto;
 }
@@ -260,7 +292,7 @@ article:hover {
 }
 
 /* ==========================================
-   7. SEÇÃO DE CERTIFICADOS
+7. SEÇÃO DE CERTIFICADOS
    ========================================== */
 .secao-certificados {
     padding: 20px;
@@ -321,7 +353,7 @@ article:hover {
 }
 
 /* ==========================================
-   8. PÁGINA DE PROJETOS
+8. PÁGINA DE PROJETOS
    ========================================== */
 .secao-projetos h1 {
     text-align: center;
@@ -336,6 +368,38 @@ article:hover {
     color: #CED4DA;
     font-size: 14px;
     margin-bottom: 30px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filtros button {
+    background-color: #495057;
+    color: #FEEAC7;
+    border: 1px solid #FFAFCC;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.filtros button:hover {
+    background-color: #9A031E;
+    color: #FFFFFF;
+}
+
+#contagem {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #CED4DA;
+    margin-bottom: 20px;
 }
 
 .projetos-grid {
@@ -420,7 +484,7 @@ article:hover {
 }
 
 /* ==========================================
-   9. PÁGINA DE CONTATO E FORMAÇÃO
+9. PÁGINA DE CONTATO E FORMAÇÃO
    ========================================== */
 .secao-contato,
 .secao-formacao {
@@ -572,7 +636,7 @@ article:hover {
 }
 
 /* ==========================================
-   10. ANIMAÇÃO E GATOS FLUTUANTES
+10. ANIMAÇÃO E GATOS FLUTUANTES
    ========================================== */
 .gatos-flutuantes {
     position: fixed;
@@ -604,11 +668,11 @@ article:hover {
 }
 
 /* ==========================================
-   11. RODAPÉ (FOOTER)
+11. RODAPÉ (FOOTER)
    ========================================== */
 footer {
-    position: relative; /* base para posicionar os gatinhos dentro dele */
-    overflow: hidden;   /* esconde o gatinho quando ele sai da tela */
+    position: relative;
+    overflow: hidden;
     background-color: #212529;
     color: #FEEAC7;
     text-align: center;
@@ -638,21 +702,7 @@ footer {
 }
 
 /* ==========================================
-   12. RESPONSIVIDADE (CELULARES)
-   ========================================== */
-@media (max-width: 600px) {
-    header {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    h1 {
-        font-size: 28px;
-    }
-}
-
-/* ==========================================
-   13. GATINHOS ANDANDO NO RODAPÉ
+12. GATINHOS ANDANDO NO RODAPÉ
    ========================================== */
 .gatos-rodape {
     position: relative;
@@ -672,11 +722,9 @@ footer {
     width: auto !important;
     max-height: 32px !important;
     opacity: 0.9;
-    /* Usa transform para uma animação super fluída e sem falhas */
     animation: correrGato 7s linear infinite;
 }
 
-/* O segundo gato corre com um tempo diferente para não andarem juntos */
 .gato-andando:nth-child(2) {
     animation-delay: -3.5s;
     animation-duration: 9s;
@@ -684,34 +732,92 @@ footer {
 
 @keyframes correrGato {
     0%   { transform: translateX(0vw) scaleX(1); }
-    49%  { transform: translateX(85vw) scaleX(1); }  /* Corre 85% da largura do ecrã para a direita */
-    50%  { transform: translateX(85vw) scaleX(-1); } /* Vira-se instantaneamente para a esquerda */
-    99%  { transform: translateX(0vw) scaleX(-1); }  /* Corre de volta para o início */
-    100% { transform: translateX(0vw) scaleX(1); }  /* Vira-se para a frente para recomeçar */
+    49%  { transform: translateX(85vw) scaleX(1); }
+    50%  { transform: translateX(85vw) scaleX(-1); }
+    99%  { transform: translateX(0vw) scaleX(-1); }
+    100% { transform: translateX(0vw) scaleX(1); }
 }
-.menu-hamburguer {
-    display: none;
-    background: transparent;
-    border: none;
-    color: inherit;
-    font-size: 1.5rem;
+
+/* ==========================================
+13. MENU HAMBÚRGUER E RESPONSIVIDADE
+   ========================================== */
+.btn-hamburguer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 34px;
+    height: 32px;
+    padding: 6px;
+    background-color: var(--btn-tema-bg);
+    border: 1px solid var(--btn-tema-border);
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    .menu-hamburguer {
-        display: block;
-    }
+.btn-hamburguer span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background-color: var(--btn-tema-color);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
-    .itensnav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-        margin-top: 12px;
-    }
+.btn-hamburguer.aberto span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.btn-hamburguer.aberto span:nth-child(2) { opacity: 0; }
+.btn-hamburguer.aberto span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-    .itensnav.ativo {
-        display: flex;
+nav {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 1rem 18px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 9998;
+}
+
+nav.aberto {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@media screen and (min-width: 768px) {
+    .btn-hamburguer { display: none; }
+    nav {
+        position: static;
+        width: auto;
+        background: transparent;
+        border: none;
+        flex-direction: row;
+        padding: 0;
+        gap: 16px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 28px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .btn-hamburguer {
+        display: none !important;
     }
 }

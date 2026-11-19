@@ -7,18 +7,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
     <!-- Importação dos ícones do Font Awesome -->
-     <!-- Novo ficheiro CSS exclusivo para os gatinhos (evita conflitos no tema) -->
+    <!-- Novo ficheiro CSS exclusivo para os gatinhos (evita conflitos no tema) -->
     <link rel="stylesheet" href="css/gatos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <p class="titlenav"><strong>Izabella Souza Matos</strong></p>
-        <nav class="itensnav">
-             <button id="menu-hamburguer" class="menu-hamburguer" aria-label="Abrir menu" aria-expanded="false">
-        <i class="fa-solid fa-bars"></i>
+
+        <button type="button" class="btn-hamburguer" id="btn-hamburguer" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
-            <button id="tema">Modo escuro</button>
+
+        <nav id="nav-menu" class="itensnav" aria-label="Navegação principal">
+            <button type="button" id="tema">Modo escuro</button>
             <a href="index.html">Início</a>
             <a href="sobre.html">Sobre</a>
             <a href="projeto.html">Projeto</a>
@@ -30,94 +34,22 @@
     <main>
         <section class="secao-projetos">
             <h1>Meus Projetos</h1>
-
-            <div class="filtros">
-                <button id="filtro-todos">Todos</button>
-                <button id="filtro-figma">Figma</button>
-                <button id="filtro-página-sobre-mim">Página Sobre Mim</button>
-                <button id="filtro-lampada">Lâmpada</button>
-                <button id="filtro-calculadora">Calculadora</button>
-            </div>
-            <p id="contagem"></p>
-            <div class="projetos" id="lista-projetos"></div>
-
             <p class="subtitulo-projetos">Conheça alguns dos trabalhos e estudos que desenvolvi</p>
 
-            <div class="projetos-grid">
-
-                <!-- Card 1: Figma -->
-                <article class="card-projeto">
-                    <div class="projeto-icone">
-                        <i class="fa-brands fa-figma"></i>
-                    </div>
-                    <div class="projeto-info">
-                        <h2>Protótipos do Figma</h2>
-                        <p>Criação das telas e identidade visual estruturadas para o desenvolvimento deste portfólio.</p>
-                        <a href="https://www.figma.com/files/team/1687251064527399275/folder/663341080?fuid=1687251063166864576" target="_blank" rel="noopener noreferrer" class="btn-projeto">
-                            Ver Projeto <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 2: Página HTML -->
-                <article class="card-projeto">
-                    <div class="projeto-icone">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
-                    <div class="projeto-info">
-                        <h2>Página Sobre Mim</h2>
-                        <p>Minha primeira página desenvolvida em HTML, CSS e JavaScript, estruturando a base da programação web.</p>
-                        <span class="badge-tech">HTML5, CSS3, JavaScript</span>
-                        <a href="https://izabellasouzadev67.github.io/portfolio-izabella-souza/sobre.html" target="_blank" rel="noopener noreferrer" class="btn-projeto">
-                            Ver Projeto <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 3: Site de Turismo -->
-                <article class="card-projeto">
-                    <div class="projeto-icone">
-                        <i class="fa-solid fa-tree"></i>
-                    </div>
-                    <div class="projeto-info">
-                        <h2>Site de Turismo</h2>
-                        <p>Projeto de um site para divulgar pontos turísticos de uma cidade. Utilizado HTML para estruturação do código, CSS para estilização e JavaScript para interatividade do usuário final.</p>
-                    </div>
-                </article>
-
-                <!-- Card 4: Projeto Lâmpada -->
-                <article class="card-projeto">
-                    <div class="projeto-icone">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <div class="projeto-info">
-                        <h2>Lâmpada interativa</h2>
-                        <p>Mini projeto de uma lâmpada interativa utilizando linguagens do desenvolvimento Front-End: HTML, CSS puro e JavaScript.</p>
-                        <a href="https://github.com/izabellasouzadev67/lampada" target="_blank" rel="noopener noreferrer" class="btn-projeto">
-                            Ver Projeto <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 5: Projeto Calculadora -->
-                <article class="card-projeto">
-                    <div class="projeto-icone">
-                        <i class="fa-solid fa-calculator"></i>
-                    </div>
-                    <div class="projeto-info">
-                        <h2>Calculadora Básica</h2>
-                        <p>Mini projeto de uma calculadora básica utilizando linguagens do desenvolvimento Front-End: HTML, CSS puro e JavaScript.</p>
-                        <a href="https://github.com/izabellasouzadev67/calculadora" target="_blank" rel="noopener noreferrer" class="btn-projeto">
-                            Ver Projeto <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
+            <div class="filtros">
+                <button type="button" id="filtro-todos">Todos</button>
+                <button type="button" id="filtro-figma">Figma</button>
+                <button type="button" id="filtro-página-sobre-mim">Página Sobre Mim</button>
+                <button type="button" id="filtro-lampada">Lâmpada</button>
+                <button type="button" id="filtro-calculadora">Calculadora</button>
             </div>
+
+            <p id="contagem"></p>
+            <div class="projetos-grid" id="lista-projetos"></div>
         </section>
     </main>
 
-   <footer>
+    <footer>
         <div class="footer-container">
             <p>Minhas redes sociais</p>
             <ul class="footer-links">
@@ -128,13 +60,15 @@
         </div>
 
         <!-- Stickers dos gatinhos passeando no rodapé com tamanho travado -->
-    <div class="gatos-rodape">
-        <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
-        <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
-    </div>
+        <div class="gatos-rodape">
+            <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
+            <img src="Imagens/gif.gif" alt="Gato andando" class="gato-andando" style="height: 32px !important; width: auto !important; max-height: 32px !important;">
+        </div>
 
         <p>&copy; 2026 Izabella Souza Matos. Todos os direitos reservados.</p>
     </footer>
+
     <script src="js/script.js"></script>
-     </body>
+    <script src="js/projeto.js"></script>
+</body>
 </html>
