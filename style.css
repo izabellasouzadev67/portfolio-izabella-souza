@@ -689,3 +689,29 @@ footer {
     99%  { transform: translateX(0vw) scaleX(-1); }  /* Corre de volta para o início */
     100% { transform: translateX(0vw) scaleX(1); }  /* Vira-se para a frente para recomeçar */
 }
+.menu-hamburguer {
+    display: none;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-hamburguer {
+        display: block;
+    }
+
+    .itensnav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .itensnav.ativo {
+        display: flex;
+    }
+}

@@ -63,6 +63,25 @@ if (botao) {
         salvarTema(virouClaro ? "claro" : "escuro");
     });
 }
+// ------------------------------------------
+    // 2. MENU HAMBÚRGUER (Mobile)
+    // ------------------------------------------
+    const botaoMenu = document.getElementById('menu-hamburguer');
+    const menuNav = document.getElementById('menu-nav');
+
+    if (botaoMenu && menuNav) {
+        botaoMenu.addEventListener('click', () => {
+            const estaAberto = menuNav.classList.toggle('ativo');
+            botaoMenu.setAttribute('aria-expanded', estaAberto);
+        });
+
+        menuNav.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                menuNav.classList.remove('ativo');
+                botaoMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
 
 /* ==========================================================
    3. LISTA DE SOFT SKILLS DINÂMICA
