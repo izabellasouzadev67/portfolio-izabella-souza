@@ -16,10 +16,10 @@ body.claro {
     --bg-body: #FFF8F0;
     --text-body: #2B2D42;
     --card-bg: #FFFFFF;
-    --header-bg: #FF7F50;
+    --header-bg: #FFD6E5;
     --header-border: rgba(95, 15, 64, 0.25);
     --btn-tema-bg: #343A40;
-    --btn-tema-border: #FFAFCC;
+    --btn-tema-border: #FEEAC7;
     --btn-tema-color: #FEEAC7;
 }
 
@@ -876,3 +876,39 @@ footer .gatos-rodape .gato-andando:nth-child(2) {
     }
 }
 header { outline: 5px solid #FFAFCC !important; }
+/* Links do menu no modo claro */
+body.claro .itensnav a {
+    color: #5F0F40 !important;
+}
+
+body.claro .itensnav a:hover {
+    color: #9A031E !important;
+}
+body.claro header {
+    border-bottom: 1px solid rgba(95, 15, 64, 0.25);
+    box-shadow: none;
+}
+/* Botões: permite animar em qualquer lugar */
+.btn-principal,
+.btn-secundario {
+    display: inline-block;
+}
+
+.btn-principal:active,
+.btn-secundario:active {
+    transform: scale(0.97);
+}
+
+/* Cards que ainda não tinham animação */
+.hero-card,
+.card-perfil,
+.secao-certificados {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-card:hover,
+.card-perfil:hover,
+.secao-certificados:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
