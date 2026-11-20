@@ -912,3 +912,100 @@ body.claro header {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
+/* ==========================================
+   PÁGINA REACT (CARDS, FILTROS E CURTIR)
+   ========================================== */
+.react-projetos h1 {
+  display: block;
+  text-align: center;
+  background: none;
+  color: var(--text-body, #FEEAC7);
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.react-projetos .filtros {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.react-projetos .filtros button {
+  background-color: var(--card-bg, #495057);
+  color: var(--text-body, #FEEAC7);
+  border: 1px solid #FFAFCC;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.react-projetos .filtros button:hover,
+.react-projetos .filtros button.ativo {
+  background-color: #9A031E;
+  border-color: #9A031E;
+  color: #FFFFFF;
+}
+
+.contagem-react {
+  text-align: center;
+  color: #CED4DA;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.lista-cards-react {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card {
+  background-color: var(--card-bg, #495057);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.card h2 {
+  color: #FFAFCC;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+.card p {
+  color: #CED4DA;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.btn-curtir {
+  background-color: #343A40;
+  color: #FEEAC7;
+  border: 1px solid #FFAFCC;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-curtir:hover {
+  background-color: #9A031E;
+  border-color: #9A031E;
+  color: #FFFFFF;
+  transform: scale(1.03);
+}
