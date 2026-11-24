@@ -78,20 +78,46 @@ document.addEventListener("DOMContentLoaded", () => {
         infoDiv.appendChild(tituloEl);
         infoDiv.appendChild(textoEl);
 
-        const urlProjeto = projeto.link || "#";
         const link = document.createElement("a");
-        link.href = urlProjeto;
-        if (urlProjeto.startsWith("http")) {
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-        }
         link.className = "btn-projeto";
-        link.innerHTML = 'Ver Projeto <i class="fa-solid fa-arrow-right"></i>';
+
+        if (projeto.link && projeto.link.trim() !== "") {
+            link.href = projeto.link;
+            if (projeto.link.startsWith("http")) {
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+            }
+            link.innerHTML = 'Ver Projeto <i class="fa-solid fa-arrow-right"></i>';
+        } else {
+            link.href = "#";
+            link.setAttribute("aria-disabled", "true");
+            link.innerHTML = 'Em breve <i class="fa-solid fa-clock"></i>';
+            link.addEventListener("click", (evento) => {
+                evento.preventDefault();
+            });
+        }
+
         infoDiv.appendChild(link);
 
         card.appendChild(iconeDiv);
         card.appendChild(infoDiv);
         listaProjetos.appendChild(card);
+    }
+
+    function atualizarContagem(lista) {
+        if (!contagem) return;
+
+        const total = lista.length;
+        if (total === 0) {
+            contagem.textContent = "Nenhum projeto encontrado para este filtro.";
+            return;
+        }
+
+        const palavraProjeto = total === 1 ? "projeto" : "projetos";
+        const palavraExibido = total === 1 ? "exibido" : "exibidos";
+        const titulos = lista.map((projeto) => projeto.titulo).join(", ");
+
+        contagem.textContent = `${total} ${palavraProjeto} ${palavraExibido}: ${titulos}`;
     }
 
     const mostrar = (lista) => {
@@ -102,10 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             criarCard(projeto);
         }
 
-        if (contagem) {
-            const titulos = lista.map((projeto) => projeto.titulo);
-            contagem.textContent = `${lista.length} projetos exibidos: ${titulos.join(", ")}`;
-        }
+        atualizarContagem(lista);
     };
 
     const filtrar = (categoria) => {
@@ -113,25 +136,50 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrar(lista);
     };
 
-    // Exibe todos inicialmente
-    mostrar(projetos);
-
     /* ==========================================================
        CONFIGURAÇÃO DOS BOTÕES DE FILTRO
        ========================================================== */
-    const botaoTodos = document.querySelector("#filtro-todos");
-    const botaoPaginaSobreMim =
-        document.querySelector("#filtro-pagina-sobre-mim") ||
-        document.querySelector("#filtro-página-sobre-mim");
-    const botaoFigma = document.querySelector("#filtro-figma");
-    const botaoLampada = document.querySelector("#filtro-lampada");
-    const botaoCalculadora = document.querySelector("#filtro-calculadora");
+    const filtrosConfig = [
+        { seletor: "#filtro-todos", categoria: "todos" },
+        { seletor: "#filtro-pagina-sobre-mim, #filtro-página-sobre-mim", categoria: "pagina-sobre-mim" },
+        { seletor: "#filtro-turismo", categoria: "turismo" },
+        { seletor: "#filtro-figma", categoria: "figma" },
+        { seletor: "#filtro-lampada", categoria: "lampada" },
+        { seletor: "#filtro-calculadora", categoria: "calculadora" }
+    ];
 
-    if (botaoTodos) botaoTodos.addEventListener("click", () => mostrar(projetos));
-    if (botaoPaginaSobreMim) {
-        botaoPaginaSobreMim.addEventListener("click", () => filtrar("pagina-sobre-mim"));
+    const botoesFiltro = [];
+
+    function marcarBotaoAtivo(botaoSelecionado) {
+        botoesFiltro.forEach((btn) => {
+            const ativo = btn === botaoSelecionado;
+            btn.classList.toggle("ativo", ativo);
+            btn.setAttribute("aria-pressed", ativo ? "true" : "false");
+        });
     }
-    if (botaoFigma) botaoFigma.addEventListener("click", () => filtrar("figma"));
-    if (botaoLampada) botaoLampada.addEventListener("click", () => filtrar("lampada"));
-    if (botaoCalculadora) botaoCalculadora.addEventListener("click", () => filtrar("calculadora"));
+
+    filtrosConfig.forEach(({ seletor, categoria }) => {
+        const botao = document.querySelector(seletor);
+        if (!botao) return;
+
+        botoesFiltro.push(botao);
+
+        botao.addEventListener("click", () => {
+            marcarBotaoAtivo(botao);
+            if (categoria === "todos") {
+                mostrar(projetos);
+            } else {
+                filtrar(categoria);
+            }
+        });
+    });
+
+    // Marca "Todos" como ativo inicialmente se existir na página
+    const botaoTodosInicial = document.querySelector("#filtro-todos");
+    if (botaoTodosInicial) {
+        marcarBotaoAtivo(botaoTodosInicial);
+    }
+
+    // Exibe todos inicialmente
+    mostrar(projetos);
 });

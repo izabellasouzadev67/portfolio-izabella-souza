@@ -247,6 +247,7 @@ body.claro .descricao-inicio strong {
     gap: 20px;
 }
 
+/* Foto de perfil com flutuação suave + pulso na borda */
 .foto-sobre {
     width: 150px;
     height: 150px;
@@ -255,6 +256,68 @@ body.claro .descricao-inicio strong {
     border: 3px solid #FFAFCC;
     display: block;
     margin: 10px auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 175, 204, 0.55);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    animation: flutuarEPulsarFoto 3.6s ease-in-out infinite;
+}
+
+.foto-sobre:hover {
+    animation-play-state: paused;
+    transform: translateY(-4px) scale(1.06) rotate(2deg);
+    border-color: #FEEAC7;
+    box-shadow: 0 12px 26px rgba(255, 175, 204, 0.35);
+}
+
+@keyframes flutuarEPulsarFoto {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 175, 204, 0.55);
+    }
+    50% {
+        transform: translateY(-7px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35), 0 0 0 12px rgba(255, 175, 204, 0);
+    }
+    100% {
+        transform: translateY(0px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 175, 204, 0);
+    }
+}
+
+/* Container opcional caso envolva .foto-sobre com <div class="avatar-animado"> */
+.avatar-animado {
+    position: relative;
+    width: 158px;
+    height: 158px;
+    border-radius: 50%;
+    padding: 4px;
+    margin: 10px auto;
+    background: linear-gradient(135deg, #FFAFCC, #9A031E, #FEEAC7, #FFAFCC);
+    background-size: 300% 300%;
+    animation: girarGradiente 5s ease infinite;
+}
+
+.avatar-animado .foto-sobre {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 3px solid var(--card-bg);
+    animation: none;
+}
+
+.avatar-animado:hover .foto-sobre {
+    transform: scale(1.04);
+}
+
+@keyframes girarGradiente {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .texto-perfil p {
@@ -875,7 +938,9 @@ footer .gatos-rodape .gato-andando:nth-child(2) {
         gap: 18px;
     }
 }
+
 header { outline: 5px solid #FFAFCC !important; }
+
 /* Links do menu no modo claro */
 body.claro .itensnav a {
     color: #5F0F40 !important;
@@ -884,10 +949,12 @@ body.claro .itensnav a {
 body.claro .itensnav a:hover {
     color: #9A031E !important;
 }
+
 body.claro header {
     border-bottom: 1px solid rgba(95, 15, 64, 0.25);
     box-shadow: none;
 }
+
 /* Botões: permite animar em qualquer lugar */
 .btn-principal,
 .btn-secundario {
@@ -912,6 +979,7 @@ body.claro header {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
+
 /* ==========================================
    PÁGINA REACT (CARDS, FILTROS E CURTIR)
    ========================================== */
@@ -1008,4 +1076,14 @@ body.claro header {
   border-color: #9A031E;
   color: #FFFFFF;
   transform: scale(1.03);
+}
+
+/* ==========================================
+   ACESSIBILIDADE (REDUÇÃO DE MOVIMENTO)
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    .foto-sobre,
+    .avatar-animado {
+        animation: none !important;
+    }
 }
