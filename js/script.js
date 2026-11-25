@@ -1,36 +1,35 @@
 /* ==========================================================
-   CONFIGURAÇÕES E UTILITÁRIOS
-   ========================================================== */
-const prefereMovimentoReduzido = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-).matches;
-
-/* ==========================================================
-   1. SAUDAÇÃO AUTOMÁTICA POR HORÁRIO
+1. SAUDAÇÃO AUTOMÁTICA POR HORÁRIO
+   (Só roda na página que tem #titulo-saudacao)
    ========================================================== */
 const tituloSaudacao = document.querySelector("#titulo-saudacao");
 
-function obterSaudacaoPorHora(hora = new Date().getHours()) {
-    if (hora >= 5 && hora < 12) return "Bom dia!";
-    if (hora >= 12 && hora < 18) return "Boa tarde!";
-    return "Boa noite!";
-}
-
 if (tituloSaudacao) {
-    tituloSaudacao.textContent = `${obterSaudacaoPorHora()} Boas-vindas ao meu perfil`;
+    const hora = new Date().getHours();
+    let saudacao;
+
+    if (hora >= 5 && hora < 12) {
+        saudacao = "Bom dia!";
+    } else if (hora >= 12 && hora < 18) {
+        saudacao = "Boa tarde!";
+    } else {
+        saudacao = "Boa noite!";
+    }
+
+    tituloSaudacao.textContent = `${saudacao} Boas-vindas ao meu perfil`;
 }
 
 /* ==========================================================
-   2. TEMA CLARO / ESCURO
+2. TEMA CLARO / ESCURO
+   (O site é escuro por padrão; a classe "claro" no body ativa o claro)
    ========================================================== */
-const botaoTema = document.querySelector("#tema");
+const botao = document.querySelector("#tema");
 const CHAVE_TEMA = "tema";
 
 function lerTemaSalvo() {
     try {
-        const valor = localStorage.getItem(CHAVE_TEMA);
-        return valor === "claro" || valor === "escuro" ? valor : null;
-    } catch {
+        return localStorage.getItem(CHAVE_TEMA);
+    } catch (erro) {
         return null;
     }
 }
@@ -38,71 +37,55 @@ function lerTemaSalvo() {
 function salvarTema(valor) {
     try {
         localStorage.setItem(CHAVE_TEMA, valor);
-    } catch {
-        // Ignora caso o localStorage esteja indisponível
+    } catch (erro) {
+        // Ignora caso o localStorage esteja bloqueado
     }
 }
 
 function aplicarTema(claro) {
     document.body.classList.toggle("claro", claro);
 
-    if (botaoTema) {
-        botaoTema.textContent = claro ? "Modo escuro" : "Modo claro";
-        botaoTema.setAttribute("aria-pressed", String(claro));
+    if (botao) {
+        botao.textContent = claro ? "Modo escuro" : "Modo claro";
     }
 }
 
+// Prioridade: escolha salva > preferência do sistema > padrão (escuro)
 const temaSalvo = lerTemaSalvo();
 const sistemaPrefereClaro = window.matchMedia("(prefers-color-scheme: light)").matches;
+
 aplicarTema(temaSalvo ? temaSalvo === "claro" : sistemaPrefereClaro);
 
-botaoTema?.addEventListener("click", () => {
-    const virouClaro = !document.body.classList.contains("claro");
-    aplicarTema(virouClaro);
-    salvarTema(virouClaro ? "claro" : "escuro");
-});
+if (botao) {
+    botao.addEventListener("click", () => {
+        const virouClaro = !document.body.classList.contains("claro");
+        aplicarTema(virouClaro);
+        salvarTema(virouClaro ? "claro" : "escuro");
+    });
+}
 
-/* ==========================================================
-   2.1 MENU HAMBÚRGUER
-   ========================================================== */
 const btnHamburguer = document.getElementById("btn-hamburguer");
 const navMenu = document.getElementById("nav-menu");
 
-function definirEstadoMenu(aberto) {
-    if (!btnHamburguer || !navMenu) return;
-    navMenu.classList.toggle("aberto", aberto);
-    btnHamburguer.classList.toggle("aberto", aberto);
-    btnHamburguer.setAttribute("aria-expanded", String(aberto));
-}
-
 if (btnHamburguer && navMenu) {
     btnHamburguer.addEventListener("click", () => {
-        const estaAberto = !navMenu.classList.contains("aberto");
-        definirEstadoMenu(estaAberto);
+        const estaAberto = navMenu.classList.toggle("aberto");
+        btnHamburguer.classList.toggle("aberto", estaAberto);
+        btnHamburguer.setAttribute("aria-expanded", estaAberto ? "true" : "false");
     });
 
+    // Fecha o menu ao clicar em um link (útil no celular)
     navMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => definirEstadoMenu(false));
-    });
-
-    document.addEventListener("keydown", (evento) => {
-        if (evento.key === "Escape" && navMenu.classList.contains("aberto")) {
-            definirEstadoMenu(false);
-            btnHamburguer.focus();
-        }
-    });
-
-    document.addEventListener("click", (evento) => {
-        const clicouFora =
-            !navMenu.contains(evento.target) && !btnHamburguer.contains(evento.target);
-        if (clicouFora && navMenu.classList.contains("aberto")) {
-            definirEstadoMenu(false);
-        }
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("aberto");
+            btnHamburguer.classList.remove("aberto");
+            btnHamburguer.setAttribute("aria-expanded", "false");
+        });
     });
 }
-
 /* ==========================================================
-   3. LISTA DE SOFT SKILLS DINÂMICA
+3. LISTA DE SOFT SKILLS DINÂMICA
+   (Só roda se existir #gostos na página)
    ========================================================== */
 const gostos = [
     "Comunicação assertiva",
@@ -114,72 +97,83 @@ const gostos = [
 const lista = document.querySelector("#gostos");
 
 if (lista) {
-    const fragmento = document.createDocumentFragment();
     for (const gosto of gostos) {
         const item = document.createElement("li");
         item.textContent = gosto;
-        fragmento.appendChild(item);
+        lista.appendChild(item);
     }
-    lista.appendChild(fragmento);
 }
 
 /* ==========================================================
-   4. BOTÃO "VOLTAR AO TOPO" (ESTILO NO CSS: .btn-topo e .visivel)
+4. BOTÃO "VOLTAR AO TOPO" (SMOOTH SCROLL)
    ========================================================== */
 const btnTopo = document.createElement("button");
-btnTopo.type = "button";
+btnTopo.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
 btnTopo.id = "btn-voltar-topo";
-btnTopo.className = "btn-topo";
 btnTopo.setAttribute("aria-label", "Voltar ao topo");
-
-const iconeSeta = document.createElement("i");
-iconeSeta.className = "fa-solid fa-arrow-up";
-iconeSeta.setAttribute("aria-hidden", "true");
-btnTopo.appendChild(iconeSeta);
-
 document.body.appendChild(btnTopo);
 
-let agendadoScroll = false;
-window.addEventListener(
-    "scroll",
-    () => {
-        if (agendadoScroll) return;
-        agendadoScroll = true;
+// Estilização injetada via JS para manter tudo isolado e funcional
+btnTopo.style.cssText = `
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #9A031E;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+`;
 
-        requestAnimationFrame(() => {
-            btnTopo.classList.toggle("visivel", window.scrollY > 300);
-            agendadoScroll = false;
-        });
-    },
-    { passive: true }
-);
+// Exibe ou oculta o botão dependendo da rolagem da página
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        btnTopo.style.display = "flex";
+    } else {
+        btnTopo.style.display = "none";
+    }
+});
 
+// Ação de clique para subir suavemente
 btnTopo.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
-        behavior: prefereMovimentoReduzido ? "auto" : "smooth"
+        behavior: "smooth"
     });
 });
 
+btnTopo.addEventListener("mouseenter", () => {
+    btnTopo.style.transform = "scale(1.1)";
+});
+
+btnTopo.addEventListener("mouseleave", () => {
+    btnTopo.style.transform = "scale(1)";
+});
+
 /* ==========================================================
-   5. EFEITO DE DIGITAÇÃO NO TÍTULO PRINCIPAL (HERO)
+5. EFEITO DE DIGITAÇÃO NO TÍTULO PRINCIPAL (HERO)
    ========================================================== */
 const elementoDigitacao = document.querySelector(".hero-card h1");
 
-if (elementoDigitacao && !prefereMovimentoReduzido) {
-    const textoOriginal = elementoDigitacao.textContent.trim();
+if (elementoDigitacao) {
+    const textoOriginal = elementoDigitacao.textContent;
     elementoDigitacao.textContent = "";
-    elementoDigitacao.setAttribute("aria-label", textoOriginal);
-
-    let indice = 0;
+    let i = 0;
 
     function digitar() {
-        if (indice < textoOriginal.length) {
-            elementoDigitacao.textContent += textoOriginal.charAt(indice);
-            indice++;
+        if (i < textoOriginal.length) {
+            elementoDigitacao.textContent += textoOriginal.charAt(i);
+            i++;
             setTimeout(digitar, 65);
-        } else {
-            elementoDigitacao.removeAttribute("aria-label");
         }
     }
 
@@ -187,21 +181,15 @@ if (elementoDigitacao && !prefereMovimentoReduzido) {
 }
 
 /* ==========================================================
-   6. DESTAQUE AUTOMÁTICO DO MENU ATIVO (ESTILO NO CSS: .ativo)
+6. DESTAQUE AUTOMÁTICO DO MENU ATIVO
    ========================================================== */
-const caminhoAtual = window.location.pathname.replace(/\/+$/, "") || "/";
+const paginaAtual = window.location.pathname.split("/").pop() || "index.html";
 const linksMenu = document.querySelectorAll(".itensnav a");
 
 linksMenu.forEach((link) => {
-    const urlLink = new URL(link.href, window.location.origin);
-    const caminhoLink = urlLink.pathname.replace(/\/+$/, "") || "/";
-
-    const ehMesmaPagina = caminhoLink === caminhoAtual;
-    link.classList.toggle("ativo", ehMesmaPagina);
-
-    if (ehMesmaPagina) {
-        link.setAttribute("aria-current", "page");
-    } else {
-        link.removeAttribute("aria-current");
+    const hrefLink = link.getAttribute("href");
+    if (hrefLink === paginaAtual) {
+        link.style.color = "#FFAFCC";
+        link.style.fontWeight = "bold";
     }
 });
