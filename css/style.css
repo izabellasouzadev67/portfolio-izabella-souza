@@ -23,6 +23,12 @@ body.claro {
     --btn-tema-color: #FEEAC7;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--bg-body);
     color: var(--text-body);
@@ -45,6 +51,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     background-color: var(--header-bg);
     border-bottom: 1px solid var(--header-border);
     padding: 12px 24px;
@@ -63,15 +70,46 @@ header::after {
     white-space: nowrap;
 }
 
-nav a {
+.itensnav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+nav a,
+.itensnav a {
     color: #FEEAC7;
     text-decoration: none;
     display: inline-block;
+    padding: 4px 2px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-nav a:hover {
+nav a:hover,
+.itensnav a:hover {
     color: #FFAFCC;
+}
+
+body.claro nav a,
+body.claro .itensnav a {
+    color: #5F0F40;
+}
+
+body.claro nav a:hover,
+body.claro .itensnav a:hover {
+    color: #9A031E;
+}
+
+.itensnav a.ativo {
+    color: #FFAFCC;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+body.claro .itensnav a.ativo {
+    color: #9A031E;
 }
 
 #tema {
@@ -94,13 +132,11 @@ nav a:hover {
 3. TÍTULOS E TIPOGRAFIA
    ========================================== */
 h1 {
-    color: #5F0F40;
-    font-size: 24px;
+    color: var(--text-body);
+    font-size: 26px;
     font-weight: 700;
     font-family: 'Poppins', Helvetica, sans-serif;
-    background-color: #D9C5B2;
-    border-radius: 40px;
-    display: inline-block;
+    margin: 0 0 16px 0;
 }
 
 /* ==========================================
@@ -120,6 +156,7 @@ article:hover {
 }
 
 .btn-principal {
+    display: inline-block;
     background-color: #9A031E;
     color: #FFFFFF;
     padding: 12px 24px;
@@ -135,7 +172,12 @@ article:hover {
     transform: translateY(-3px);
 }
 
+.btn-principal:active {
+    transform: scale(0.97);
+}
+
 .btn-secundario {
+    display: inline-block;
     background-color: #343A40;
     color: #FEEAC7;
     padding: 12px 24px;
@@ -151,6 +193,10 @@ article:hover {
     border-color: #FFAFCC;
     color: #FFAFCC;
     transform: translateY(-3px);
+}
+
+.btn-secundario:active {
+    transform: scale(0.97);
 }
 
 /* ==========================================
@@ -169,6 +215,12 @@ article:hover {
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 .badge-ola {
@@ -186,9 +238,7 @@ article:hover {
 .hero-card h1 {
     font-size: 28px;
     color: var(--text-body);
-    background: none;
     margin-bottom: 15px;
-    display: block;
 }
 
 .descricao-inicio {
@@ -229,10 +279,8 @@ body.claro .descricao-inicio strong {
 .secao-habilidades h2 {
     text-align: center;
     margin-bottom: 20px;
-    background: none;
     color: var(--text-body);
     font-size: 24px;
-    display: block;
 }
 
 .card-perfil {
@@ -245,9 +293,14 @@ body.claro .descricao-inicio strong {
     align-items: center;
     text-align: center;
     gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Foto de perfil com flutuação suave + pulso na borda */
+.card-perfil:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
 .foto-sobre {
     width: 150px;
     height: 150px;
@@ -283,7 +336,6 @@ body.claro .descricao-inicio strong {
     }
 }
 
-/* Container opcional caso envolva .foto-sobre com <div class="avatar-animado"> */
 .avatar-animado {
     position: relative;
     width: 158px;
@@ -397,6 +449,12 @@ body.claro .lista-hard-skills p {
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     margin-top: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.secao-certificados:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 .secao-certificados h2 {
@@ -462,11 +520,9 @@ body.claro .instituicao {
    ========================================== */
 .secao-projetos h1 {
     text-align: center;
-    margin-bottom: 5px;
-    background: none;
+    margin-bottom: 8px;
     color: var(--text-body);
-    font-size: 24px;
-    display: block;
+    font-size: 26px;
 }
 
 .subtitulo-projetos {
@@ -616,10 +672,8 @@ body.claro .projeto-info p {
 .secao-contato h1,
 .secao-formacao h1 {
     text-align: center;
-    margin-bottom: 5px;
-    background: none;
+    margin-bottom: 8px;
     color: var(--text-body);
-    display: block;
 }
 
 .contato-container {
@@ -664,7 +718,6 @@ body.claro .subtitulo {
     color: #FEEAC7;
     font-size: 15px;
     font-family: inherit;
-    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
@@ -779,29 +832,34 @@ footer {
     background-color: #212529;
     color: #FEEAC7;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 20px;
+    padding: 24px 16px;
+    margin-top: 32px;
     border-top: 1px solid #FFAFCC;
 }
 
 .footer-links {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
     list-style: none;
     padding: 0;
-    margin: 10px 0;
+    margin: 12px 0;
 }
 
 .footer-links a {
     color: #FEEAC7;
-    font-size: 24px;
+    font-size: 22px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-links a:hover {
     color: #FFAFCC;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 footer .gatos-rodape {
@@ -881,7 +939,6 @@ footer .gatos-rodape .gato-andando:nth-child(2) {
     transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Telemóvel (até 767px): mostra o hambúrguer e esconde o menu até clicar */
 @media screen and (max-width: 767px) {
     .btn-hamburguer {
         display: flex !important;
@@ -895,7 +952,6 @@ footer .gatos-rodape .gato-andando:nth-child(2) {
         top: 61px;
         left: 0;
         width: 100%;
-        box-sizing: border-box;
         background-color: var(--header-bg, #212529);
         border-bottom: 1px solid var(--header-border, #FFAFCC);
         flex-direction: column;
@@ -912,12 +968,7 @@ footer .gatos-rodape .gato-andando:nth-child(2) {
     }
 }
 
-/* Computador (a partir de 768px): esconde o hambúrguer e exibe links em linha */
 @media screen and (min-width: 768px) {
-    header {
-        gap: 16px;
-    }
-
     .btn-hamburguer {
         display: none !important;
     }
@@ -939,143 +990,132 @@ footer .gatos-rodape .gato-andando:nth-child(2) {
     }
 }
 
-header { outline: 5px solid #FFAFCC !important; }
-
-/* Links do menu no modo claro */
-body.claro .itensnav a {
-    color: #5F0F40 !important;
-}
-
-body.claro .itensnav a:hover {
-    color: #9A031E !important;
-}
-
-body.claro header {
-    border-bottom: 1px solid rgba(95, 15, 64, 0.25);
-    box-shadow: none;
-}
-
-/* Botões: permite animar em qualquer lugar */
-.btn-principal,
-.btn-secundario {
-    display: inline-block;
-}
-
-.btn-principal:active,
-.btn-secundario:active {
-    transform: scale(0.97);
-}
-
-/* Cards que ainda não tinham animação */
-.hero-card,
-.card-perfil,
-.secao-certificados {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hero-card:hover,
-.card-perfil:hover,
-.secao-certificados:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-}
-
 /* ==========================================
    PÁGINA REACT (CARDS, FILTROS E CURTIR)
    ========================================== */
 .react-projetos h1 {
-  display: block;
-  text-align: center;
-  background: none;
-  color: var(--text-body, #FEEAC7);
-  font-size: 26px;
-  margin-bottom: 18px;
+    display: block;
+    text-align: center;
+    color: var(--text-body, #FEEAC7);
+    font-size: 26px;
+    margin-bottom: 18px;
 }
 
 .react-projetos .filtros {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .react-projetos .filtros button {
-  background-color: var(--card-bg, #495057);
-  color: var(--text-body, #FEEAC7);
-  border: 1px solid #FFAFCC;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    background-color: var(--card-bg, #495057);
+    color: var(--text-body, #FEEAC7);
+    border: 1px solid #FFAFCC;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .react-projetos .filtros button:hover,
 .react-projetos .filtros button.ativo {
-  background-color: #9A031E;
-  border-color: #9A031E;
-  color: #FFFFFF;
+    background-color: #9A031E;
+    border-color: #9A031E;
+    color: #FFFFFF;
 }
 
 .contagem-react {
-  text-align: center;
-  color: #CED4DA;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
+    text-align: center;
+    color: #CED4DA;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
 }
 
 .lista-cards-react {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .card {
-  background-color: var(--card-bg, #495057);
-  border-radius: 16px;
-  padding: 24px;
-  margin: 0;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: var(--card-bg, #495057);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
 .card h2 {
-  color: #FFAFCC;
-  margin: 0 0 8px 0;
-  font-size: 20px;
+    color: #FFAFCC;
+    margin: 0 0 8px 0;
+    font-size: 20px;
 }
 
 .card p {
-  color: #CED4DA;
-  line-height: 1.6;
-  margin: 0 0 16px 0;
+    color: #CED4DA;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
 }
 
 .btn-curtir {
-  background-color: #343A40;
-  color: #FEEAC7;
-  border: 1px solid #FFAFCC;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    background-color: #343A40;
+    color: #FEEAC7;
+    border: 1px solid #FFAFCC;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .btn-curtir:hover {
-  background-color: #9A031E;
-  border-color: #9A031E;
-  color: #FFFFFF;
-  transform: scale(1.03);
+    background-color: #9A031E;
+    border-color: #9A031E;
+    color: #FFFFFF;
+    transform: scale(1.03);
+}
+
+/* ==========================================
+   BOTÃO VOLTAR AO TOPO
+   ========================================== */
+.btn-topo {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background-color: #9A031E;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-topo.visivel {
+    display: flex;
+}
+
+.btn-topo:hover {
+    transform: scale(1.1);
 }
 
 /* ==========================================
