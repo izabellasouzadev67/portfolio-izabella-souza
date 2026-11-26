@@ -1,32 +1,4 @@
-const { useState } = React;
-
-const projetos = [
-  {
-    titulo: "Portfólio",
-    descricao: "Este portfólio é um projeto pessoal criado com o objetivo de demonstrar as minhas competências técnicas em desenvolvimento front-end e design UI/UX. Ele foi construído utilizando HTML5, CSS3 e JavaScript, com o Figma sendo empregado para a criação de protótipos e wireframes.",
-    categoria: "portfólio"
-  },
-  {
-    titulo: "Projetos",
-    descricao: "Meus projetos em React.",
-    categoria: "projetos"
-  },
-  {
-    titulo: "Formação",
-    descricao: "Minha jornada de aprendizado e qualificações.",
-    categoria: "formacao"
-  },
-  {
-    titulo: "Contato",
-    descricao: "Fale comigo.",
-    categoria: "contato"
-  },
-  {
-    titulo: "Calculadora",
-    descricao: "Meu projeto em JavaScript.",
-    categoria: "calculadora"
-  }
-];
+const { useState, useEffect } = React;
 
 const Card = ({ titulo, descricao }) => {
   const [curtidas, setCurtidas] = useState(0);
@@ -47,11 +19,21 @@ const Card = ({ titulo, descricao }) => {
 };
 
 const App = () => {
+  const [projetos, setProjetos] = useState([]);
   const [filtro, setFiltro] = useState("Todos");
 
-  const visiveis = filtro === "Todos"
-    ? projetos
-    : projetos.filter((p) => p.categoria === filtro);
+  useEffect (() => {
+    fetch("projetos.json")
+      .then((resposta) => resposta.json())
+      .then((dados) => setProjetos(dados));
+  } ,[]);
+  if (projetos.length === 0) {
+    return <main> <p>Carregando projetos... </p></main>;
+  }
+  let visiveis = projetos;
+    if (filtro !== "Todos") {
+      visiveis = projetos.filter((p) => p.categoria === filtro);
+    }
 
   return (
     <main className="react-projetos">
