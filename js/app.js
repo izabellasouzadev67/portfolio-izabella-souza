@@ -23,7 +23,7 @@ const App = () => {
   const [filtro, setFiltro] = useState("Todos");
 
   useEffect (() => {
-    fetch("projetos.json")
+    fetch("projeto.json")
       .then((resposta) => resposta.json())
       .then((dados) => setProjetos(dados));
   } ,[]);
